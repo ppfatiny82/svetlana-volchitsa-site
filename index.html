@@ -1343,21 +1343,25 @@ ${t.lyrics}`], {type: 'text/plain;charset=utf-8'});
             renderTracklist('all', '');
             updatePlayerUI();
 
-            // Load dynamic songs from content/songs.json if available
-            fetch('content/songs.json')
+                        // Full dynamic loader: loads ALL songs added in admin without any limit!
+            fetch('content/songs.json?t=' + Date.now())
                 .then(r => { if (!r.ok) throw new Error('no songs.json'); return r.json(); })
                 .then(d => {
-                    if (d && d.tracks && d.tracks.length > 0) {
-                        d.tracks.forEach((item, idx) => {
-                            if (TRACKS[idx]) {
-                                TRACKS[idx].title = item.title || TRACKS[idx].title;
-                                if (item.audio) TRACKS[idx].audio = item.audio;
-                                if (item.cover) TRACKS[idx].cover = item.cover;
-                                if (item.lyrics) TRACKS[idx].lyrics = item.lyrics;
-                            }
-                        });
+                    if (d && d.tracks && Array.isArray(d.tracks) && d.tracks.length > 0) {
+                        TRACKS = d.tracks.map((item, idx) => ({
+                            id: idx + 1,
+                            title: item.title || ('Трек ' + (idx + 1)),
+                            genre: item.genre || 'Танцевальный хит • 2026',
+                            category: item.category || 'dance',
+                            duration: item.duration || '3:30',
+                            year: item.year || '2026',
+                            cover: item.cover ? item.cover : (userTracks[0] ? userTracks[0].cover : ''),
+                            audio: item.audio ? item.audio : (idx === 0 ? gubiVishniAudio : ''),
+                            lyrics: item.lyrics || ''
+                        }));
                         renderTracklist(activeCategory, activeSearch);
                         updatePlayerUI();
+                        console.log('Loaded ' + TRACKS.length + ' tracks from admin panel successfully!');
                     }
                 })
                 .catch(e => console.log('Using default embedded tracklist:', e));
