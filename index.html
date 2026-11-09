@@ -200,7 +200,7 @@
                 <!-- Stats Cards -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 max-w-xl mx-auto lg:mx-0">
                     <div class="glass-card rounded-2xl p-4 text-center">
-                        <span class="block text-2xl sm:text-3xl font-black text-gold">13+</span>
+                        <span id="heroTrackCount" class="block text-2xl sm:text-3xl font-black text-gold">2</span>
                         <span class="text-xs text-zinc-400 font-medium">Треков на сайте</span>
                     </div>
                     <div class="glass-card rounded-2xl p-4 text-center">
@@ -431,8 +431,8 @@
 
             <!-- Filter Tabs -->
             <div class="flex flex-wrap gap-2.5 mb-8">
-                <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-gold text-zinc-950 shadow-md" data-category="all">
-                    Все песни (13)
+                <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-gold text-zinc-950 shadow-md" id="btnAllSongsTab" data-category="all">
+                    Все песни
                 </button>
                 <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-stage hover:bg-zinc-800 text-zinc-300 border border-zinc-700" data-category="dance">
                     Танцевальные хиты
@@ -1069,6 +1069,16 @@
         
         function renderTracklist(category = 'all', searchQuery = '') {
             const container = document.getElementById('trackListContainer');
+
+            const allBtn = document.getElementById('btnAllSongsTab');
+            if (allBtn) {
+                allBtn.textContent = `Все песни (${TRACKS.length})`;
+            }
+            const heroCount = document.getElementById('heroTrackCount');
+            if (heroCount) {
+                heroCount.textContent = `${TRACKS.length}`;
+            }
+
             if (!container) return;
             container.innerHTML = '';
 
