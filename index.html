@@ -1398,8 +1398,8 @@ ${t.lyrics}`], {type: 'text/plain;charset=utf-8'});
                             category: item.category || 'dance',
                             duration: item.duration || '3:30',
                             year: item.year || '2026',
-                            cover: item.cover ? item.cover : (userTracks[0] ? userTracks[0].cover : ''),
-                            audio: item.audio ? item.audio : (idx === 0 ? gubiVishniAudio : ''),
+                            cover: item.cover ? fixPath(item.cover) : (userTracks[0] ? userTracks[0].cover : ''),
+                            audio: item.audio ? fixPath(item.audio) : (idx === 0 ? gubiVishniAudio : ''),
                             lyrics: item.lyrics || ''
                         }));
                         renderTracklist(activeCategory, activeSearch);
