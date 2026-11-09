@@ -1,0 +1,40 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: 'ru'
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "songs"
+    label: "Дискография и песни"
+    label_singular: "Песня"
+    folder: "content/songs"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Название песни", name: "title", widget: "string"}
+      - {label: "Жанр / Подзаголовок", name: "genre", widget: "string", default: "Танцевальный хит"}
+      - {label: "Категория", name: "category", widget: "select", options: [
+          {label: "Танцевальные", value: "dance"},
+          {label: "Для души и лирика", value: "soul"},
+          {label: "Юмор и драйв", value: "humor"}
+        ]}
+      - {label: "Длительность", name: "duration", widget: "string", default: "3:30"}
+      - {label: "Аудиофайл (MP3)", name: "audio", widget: "file", required: false}
+      - {label: "Обложка трека", name: "cover", widget: "image", required: false}
+      - {label: "Текст песни", name: "lyrics", widget: "text"}
+
+  - name: "pages"
+    label: "Тексты на сайте"
+    files:
+      - label: "Главная страница и контакты"
+        name: "home"
+        file: "content/pages/home.json"
+        fields:
+          - {label: "Главный слоган (Hero)", name: "hero_subtitle", widget: "text"}
+          - {label: "Биография певицы", name: "about_bio", widget: "text"}
+          - {label: "Цитата Светланы", name: "about_quote", widget: "string"}
+          - {label: "Телефон артиста", name: "phone", widget: "string"}
+          - {label: "Email артиста", name: "email", widget: "string"}
