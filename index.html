@@ -972,6 +972,20 @@
                 console.log('Using default tracks catalog:', err);
             });
 
+        
+        htmlAudio.addEventListener('loadedmetadata', () => {
+            if (htmlAudio.duration && !isNaN(htmlAudio.duration)) {
+                const totalSec = Math.floor(htmlAudio.duration);
+                const m = Math.floor(totalSec / 60);
+                const s = totalSec % 60;
+                const durStr = `${m}:${s < 10 ? '0' + s : s}`;
+                document.getElementById('mainTotalTime').textContent = durStr;
+                if (TRACKS[currentTrackIndex]) {
+                    TRACKS[currentTrackIndex].duration = durStr;
+                }
+            }
+        });
+
         htmlAudio.addEventListener('ended', () => {
             nextTrack();
         });

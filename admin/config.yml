@@ -7,7 +7,7 @@ media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
-  # 1. MUSIC & SONGS (ДИСКОГРАФИЯ)
+  # 1. MUSIC & SONGS
   - name: "music"
     label: "🎵 Дискография и песни"
     files:
@@ -18,24 +18,20 @@ collections:
           - label: "Список песен"
             name: "tracks"
             widget: "list"
-            summary: "{{fields.title}} ({{fields.genre}})"
+            summary: "{{fields.title}}"
             fields:
               - {label: "Название песни", name: "title", widget: "string"}
-              - {label: "Жанр / Подзаголовок", name: "genre", widget: "string", default: "Танцевальный хит"}
-              - {label: "Категория", name: "category", widget: "select", options: [
+              - {label: "Аудиофайл песни (MP3)", name: "audio", widget: "file"}
+              - {label: "Обложка трека (квадратная)", name: "cover", widget: "image", required: false}
+              - {label: "Жанр / Подзаголовок", name: "genre", widget: "string", default: "Танцевальный хит", required: false}
+              - {label: "Категория", name: "category", widget: "select", default: "dance", options: [
                   {label: "Танцевальные", value: "dance"},
                   {label: "Для души и лирика", value: "soul"},
                   {label: "Юмор и драйв", value: "humor"}
                 ]}
-              - {label: "Длительность (мин:сек)", name: "duration", widget: "string", default: "3:30"}
-              - {label: "Год выпуска", name: "year", widget: "string", default: "2026"}
-              - {label: "Аудиофайл песни (MP3)", name: "audio", widget: "file", required: false}
-              - {label: "Несжатый мастер для радио (WAV)", name: "wav_audio", widget: "file", required: false}
-              - {label: "Обложка трека (квадратная)", name: "cover", widget: "image", required: false}
-              - {label: "Ссылка на Яндекс Музыку", name: "yandex_url", widget: "string", required: false}
-              - {label: "Текст песни (стихи)", name: "lyrics", widget: "text"}
+              - {label: "Текст песни (стихи)", name: "lyrics", widget: "text", required: false}
 
-  # 2. CUSTOM SONGS SERVICE (ПЕСНЯ НА ЗАКАЗ)
+  # 2. CUSTOM SONGS SERVICE
   - name: "services"
     label: "✍️ Заказ авторских песен"
     files:
@@ -45,18 +41,11 @@ collections:
         fields:
           - {label: "Главный заголовок", name: "title", widget: "string", default: "Напишу и спою авторскую песню для вашего торжества"}
           - {label: "Описание услуги", name: "description", widget: "text"}
-          - {label: "Сроки создания (дней)", name: "timeline", widget: "string", default: "5–10 рабочих дней"}
+          - {label: "Сроки создания", name: "timeline", widget: "string", default: "5–10 рабочих дней"}
           - {label: "Телефон для заказов", name: "phone", widget: "string", default: "+7 (908) 168-23-77"}
           - {label: "Email для заказов", name: "email", widget: "string", default: "ppfatiny82@yandex.ru"}
-          - label: "Пакеты и поводы для песен"
-            name: "occasions"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - {label: "Повод (название карточки)", name: "title", widget: "string"}
-              - {label: "Описание (для кого подходит)", name: "description", widget: "text"}
 
-  # 3. BRANDING & HERO (ОФОРМЛЕНИЕ И ГЛАВНАЯ)
+  # 3. BRANDING & HERO
   - name: "branding"
     label: "👑 Главный экран и брендинг"
     files:
@@ -65,13 +54,11 @@ collections:
         file: "content/hero.json"
         fields:
           - {label: "Сценическое имя", name: "artist_name", widget: "string", default: "Светлана Волчица"}
-          - {label: "Творческий статус", name: "artist_title", widget: "string", default: "Певица"}
           - {label: "Главный слоган", name: "hero_subtitle", widget: "text"}
           - {label: "Бейдж-анонс в шапке", name: "hero_badge", widget: "string", default: "★ АВТОРСКИЕ ПЕСНИ • КЛИПЫ • ПРЕМЬЕРЫ"}
           - {label: "Главный студийный портрет", name: "portrait_image", widget: "image", required: false}
-          - {label: "Фирменный логотип", name: "logo_image", widget: "image", required: false}
 
-  # 4. ABOUT THE SINGER (О ПЕВИЦЕ И ФОТО)
+  # 4. ABOUT THE SINGER
   - name: "about"
     label: "🌹 О певице (биография)"
     files:
@@ -80,35 +67,5 @@ collections:
         file: "content/about.json"
         fields:
           - {label: "Заголовок раздела", name: "title", widget: "string", default: "«Пою душой для тех, кто умеет чувствовать»"}
-          - {label: "Текст биографии (абзац 1)", name: "bio_p1", widget: "text"}
-          - {label: "Текст биографии (абзац 2)", name: "bio_p2", widget: "text"}
+          - {label: "Текст биографии", name: "bio_p1", widget: "text"}
           - {label: "Личная цитата Светланы Волчицы", name: "quote", widget: "text"}
-
-  # 5. STREAMING & SOCIALS (ПЛОЩАДКИ И СОЦСЕТИ)
-  - name: "socials"
-    label: "🌐 Ссылки на стриминги и соцсети"
-    files:
-      - label: "Официальные ссылки"
-        name: "links"
-        file: "content/socials.json"
-        fields:
-          - {label: "Яндекс Музыка (ссылка)", name: "yandex_music", widget: "string", default: "https://music.yandex.ru/artist/26875265"}
-          - {label: "VK Музыка (ссылка)", name: "vk_music", widget: "string", default: "https://vk.ru/artist/1849024441237901258"}
-          - {label: "Сообщество ВКонтакте", name: "vk_community", widget: "string", default: "https://vk.ru/svetlanavolchitsa"}
-          - {label: "Ссылка на Telegram-стикерпак", name: "tg_stickers", widget: "string", default: "https://t.me/addstickers"}
-
-  # 6. FAQ & LICENSE (ВОПРОС-ОТВЕТ И ЛИЦЕНЗИЯ)
-  - name: "faq_section"
-    label: "📜 Вопрос-ответ и Лицензия"
-    files:
-      - label: "Частые вопросы (добавить / изменить)"
-        name: "faq_list"
-        file: "content/faq.json"
-        fields:
-          - label: "Список вопросов и ответов"
-            name: "items"
-            widget: "list"
-            summary: "{{fields.question}}"
-            fields:
-              - {label: "Вопрос", name: "question", widget: "string"}
-              - {label: "Ответ", name: "answer", widget: "text"}
