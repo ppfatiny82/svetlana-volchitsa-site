@@ -937,7 +937,33 @@
 
     <!-- APPLICATION SCRIPTS -->
     <script>
-        let TRACKS = [];
+        
+        // Real track data from Svetlana's upload
+        let userTracks = [
+            {
+                id: 1,
+                title: "Губы вишни",
+                genre: "Танцевальный хит • 2026",
+                category: "humor",
+                duration: "3:24",
+                year: "2026",
+                cover: "",
+                audio: "/assets/uploads/губы-вишни.wav",
+                lyrics: `Я листаю ленту, там сплошной фасон...
+Губы цвета вишни, взгляд горяч и смел,
+Ты такой красивой в жизни не хотел!
+
+Припев:
+Губы вишни, губы сладки,
+Не играй со мной ты в прятки!
+Я девчонка с огоньком,
+Сердце бьётся под замком.
+Губы вишни, взгляд шальной —
+Этой ночью ты со мной!`
+            }
+        ];
+
+        let TRACKS = userTracks;
 
         let currentTrackIndex = 0;
         let isPlaying = false;
@@ -1212,59 +1238,25 @@
             playTrack();
         }
 
+        
         function playTrack() {
             isPlaying = true;
             updatePlayerUI();
-
-            const trackId = currentTrackIndex + 1;
+            
             const currentT = TRACKS[currentTrackIndex];
-            const audioPath = (currentT && currentT.audio) ? currentT.audio : AUDIO_MAP[trackId];
+            let audioSrc = currentT ? (currentT.audio || gubiVishniAudio) : gubiVishniAudio;
 
-            if (audioPath) {
-                stopSynthAudio();
-                try {
-                    htmlAudio.src = audioPath;
-                    const vSlider = document.getElementById('volumeSlider');
-                    htmlAudio.volume = vSlider ? vSlider.value / 100 : 0.9;
-                    const playPromise = htmlAudio.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(e => {
-                            console.warn('Real audio file not found on server, using synth melody:', e);
-                            startSynthAudio();
-                        });
-                    }
-                } catch (e) {
-                    startSynthAudio();
-                }
-            } else {
-                htmlAudio.pause();
-                startSynthAudio();
-            }
-
-            // Progress bar timer loop (always ticks smoothly!)
-            if (playInterval) clearInterval(playInterval);
-            playInterval = setInterval(() => {
-                currentSeconds++;
-                const parts = (TRACKS[currentTrackIndex] ? TRACKS[currentTrackIndex].duration : "3:30").split(':');
-                const totalSec = parseInt(parts[0]) * 60 + parseInt(parts[1]);
-                
-                if (currentSeconds >= totalSec) {
-                    nextTrack();
-                    return;
-                }
-
-                const pct = (currentSeconds / totalSec) * 100;
-                const mProg = document.getElementById('mainProgressBar');
-                if (mProg) mProg.style.width = pct + '%';
-                
-                const miniProg = document.getElementById('miniProgressBar');
-                if (miniProg) miniProg.style.width = pct + '%';
-
-                const m = Math.floor(currentSeconds / 60);
-                const s = currentSeconds % 60;
-                const curTimeEl = document.getElementById('mainCurrentTime');
-                if (curTimeEl) curTimeEl.textContent = `${m}:${s < 10 ? '0' + s : s}`;
-            }, 1000);
+            stopSynthAudio();
+            htmlAudio.src = audioSrc;
+            const vSlider = document.getElementById('volumeSlider');
+            htmlAudio.volume = vSlider ? vSlider.value / 100 : 1.0;
+            
+            // Try playing the uploaded file, fallback to embedded audio if file not found
+            htmlAudio.play().catch(e => {
+                console.warn('Playback error on uploaded path, playing embedded studio audio:', e);
+                htmlAudio.src = gubiVishniAudio;
+                htmlAudio.play().catch(err => console.error(err));
+            });
         }
 
         function pauseTrack() {
