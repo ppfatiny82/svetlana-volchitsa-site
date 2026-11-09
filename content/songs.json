@@ -1,0 +1,11 @@
+{
+  "tracks": [
+    {
+      "genre": "Танцевальный хит",
+      "category": "humor",
+      "audio": "/assets/uploads/губы-вишни.wav",
+      "cover": "/assets/uploads/губы-вишни.jpg",
+      "title": "Губы вишни"
+    }
+  ]
+}
