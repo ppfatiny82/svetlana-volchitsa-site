@@ -943,6 +943,38 @@
 
         let TRACKS = userTracks;
 
+// === МОСТИК МЕЖДУ АДМИНКОЙ И САЙТОМ ===
+    fetch('content/music.json')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.albums) {
+          let newTracks = [];
+          data.albums.forEach(album => {
+            if (album.tracks) {
+              album.tracks.forEach((track, index) => {
+                newTracks.push({
+                  id: newTracks.length + 1,
+                  title: track.track_title || 'Без названия',
+                  genre: album.title || 'Сингл',
+                  audio: track.audio,
+                  cover: track.track_cover || album.cover || '',
+                  lyrics: track.lyrics || ''
+                });
+              });
+            }
+          });
+          if (newTracks.length > 0) {
+            TRACKS = newTracks; // Загружаем музыку из админки
+            if (typeof renderTracklist === 'function') renderTracklist('all', ''); // Рисуем список
+            currentTrackIndex = 0;
+            if (typeof updatePlayerUI === 'function') updatePlayerUI(); // Обновляем картинку и текст плеера
+          }
+        }
+      })
+      .catch(err => console.log("Музыка пока не загружена"));
+    // ======================================
+
+
         let currentTrackIndex = 0;
         let isPlaying = false;
         let playInterval = null;
