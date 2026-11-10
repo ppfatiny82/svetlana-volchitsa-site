@@ -1,71 +1,24 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: ppfatiny82/svetlana-volchitsa-site
   branch: main
 
-locale: 'ru'
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
+media_folder: "uploads"
+public_folder: "uploads"
 
 collections:
-  # 1. MUSIC & SONGS
-  - name: "music"
-    label: "🎵 Дискография и песни"
+  - name: "content"
+    label: "Контент сайта"
     files:
-      - label: "Все песни на сайте (добавить / удалить)"
-        name: "tracklist"
-        file: "content/songs.json"
+      - label: "Плейлист"
+        name: "playlist"
+        file: "playlist.json"
         fields:
-          - label: "Список песен"
+          - label: "Мои песни"
             name: "tracks"
             widget: "list"
-            summary: "{{fields.title}}"
             fields:
-              - {label: "Название песни", name: "title", widget: "string"}
-              - {label: "Аудиофайл песни (MP3)", name: "audio", widget: "file"}
-              - {label: "Обложка трека (квадратная)", name: "cover", widget: "image", required: false}
-              - {label: "Жанр / Подзаголовок", name: "genre", widget: "string", default: "Танцевальный хит", required: false}
-              - {label: "Категория", name: "category", widget: "select", default: "dance", options: [
-                  {label: "Танцевальные", value: "dance"},
-                  {label: "Для души и лирика", value: "soul"},
-                  {label: "Юмор и драйв", value: "humor"}
-                ]}
-              - {label: "Текст песни (стихи)", name: "lyrics", widget: "text", required: false}
-
-  # 2. CUSTOM SONGS SERVICE
-  - name: "services"
-    label: "✍️ Заказ авторских песен"
-    files:
-      - label: "Настройки услуги «Песня на заказ»"
-        name: "custom_songs"
-        file: "content/services.json"
-        fields:
-          - {label: "Главный заголовок", name: "title", widget: "string", default: "Напишу и спою авторскую песню для вашего торжества"}
-          - {label: "Описание услуги", name: "description", widget: "text"}
-          - {label: "Сроки создания", name: "timeline", widget: "string", default: "5–10 рабочих дней"}
-          - {label: "Телефон для заказов", name: "phone", widget: "string", default: "+7 (908) 168-23-77"}
-          - {label: "Email для заказов", name: "email", widget: "string", default: "ppfatiny82@yandex.ru"}
-
-  # 3. BRANDING & HERO
-  - name: "branding"
-    label: "👑 Главный экран и брендинг"
-    files:
-      - label: "Главный баннер, фото и слоганы"
-        name: "hero"
-        file: "content/hero.json"
-        fields:
-          - {label: "Сценическое имя", name: "artist_name", widget: "string", default: "Светлана Волчица"}
-          - {label: "Главный слоган", name: "hero_subtitle", widget: "text"}
-          - {label: "Бейдж-анонс в шапке", name: "hero_badge", widget: "string", default: "★ АВТОРСКИЕ ПЕСНИ • КЛИПЫ • ПРЕМЬЕРЫ"}
-          - {label: "Главный студийный портрет", name: "portrait_image", widget: "image", required: false}
-
-  # 4. ABOUT THE SINGER
-  - name: "about"
-    label: "🌹 О певице (биография)"
-    files:
-      - label: "Биография и цитата"
-        name: "about_content"
-        file: "content/about.json"
-        fields:
-          - {label: "Заголовок раздела", name: "title", widget: "string", default: "«Пою душой для тех, кто умеет чувствовать»"}
-          - {label: "Текст биографии", name: "bio_p1", widget: "text"}
-          - {label: "Личная цитата Светланы Волчицы", name: "quote", widget: "text"}
+              - {label: "Название трека", name: "title", widget: "string"}
+              - {label: "Аудиофайл (WAV/MP3)", name: "audio", widget: "file"}
+              - {label: "Обложка", name: "cover", widget: "image"}
+              - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
