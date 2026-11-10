@@ -14,28 +14,37 @@ collections:
         name: "music"
         file: "content/music.json"
         fields:
-          - label: "Мои альбомы"
+          - label: "Мои альбомы и релизы"
             name: "albums"
             widget: "list"
             fields:
-              - {label: "Название альбома", name: "title", widget: "string"}
+              - {label: "Название альбома/сингла", name: "title", widget: "string"}
               - {label: "Обложка альбома", name: "cover", widget: "image"}
-              - label: "Песни в альбоме"
+              - label: "Список песен в альбоме"
                 name: "tracks"
                 widget: "list"
                 fields:
                   - {label: "Название песни", name: "track_title", widget: "string"}
+                  - {label: "Обложка песни", name: "track_cover", widget: "image", required: false}
                   - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
-                  - {label: "Обложка песни (если отличается от альбома)", name: "track_cover", widget: "image", required: false}
                   - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
 
       - label: "⚙️ Настройки сайта"
         name: "settings"
         file: "content/settings.json"
         fields:
-          - {label: "Главное фото (где вы на стуле)", name: "main_photo", widget: "image", required: false}
+          - {label: "Главное фото на обложке", name: "hero_photo", widget: "image", required: false}
+          - {label: "Фото в блоке 'О певице'", name: "main_photo", widget: "image", required: false}
           - {label: "Текст 'О певице'", name: "about_text", widget: "text", required: false}
-          - {label: "Своя иконка ВКонтакте", name: "vk_icon", widget: "image", required: false}
-          - {label: "Ссылка ВКонтакте", name: "vk_link", widget: "string", required: false}
-          - {label: "Ссылка Яндекс Музыка", name: "yandex_link", widget: "string", required: false}
-          - {label: "Ссылка на Telegram стикеры", name: "tg_link", widget: "string", required: false}
+          - {label: "Название свежего сингла на фото", name: "fresh_single_title", widget: "string", required: false}
+          - {label: "Подпись под свежим синглом", name: "fresh_single_desc", widget: "string", required: false}
+          - {label: "Ссылка на ВКонтакте (Сообщество)", name: "vk_link", widget: "string", required: false}
+          - {label: "Ссылка на VK Музыку", name: "vk_music_link", widget: "string", required: false}
+          - {label: "Ссылка на Яндекс Музыку", name: "yandex_link", widget: "string", required: false}
+          - {label: "Ссылка на Звук (zvuk.com)", name: "zvuk_link", widget: "string", required: false}
+          - {label: "Ссылка на Apple Music", name: "apple_music_link", widget: "string", required: false}
+          - {label: "Ссылка на Spotify", name: "spotify_link", widget: "string", required: false}
+          - {label: "Ссылка на Band.link", name: "bandlink_link", widget: "string", required: false}
+          - {label: "Ссылка на YouTube", name: "youtube_link", widget: "string", required: false}
+          - {label: "Ссылка на Telegram-канал", name: "tg_channel_link", widget: "string", required: false}
+          - {label: "Ссылка на стикерпак Telegram", name: "tg_stickers_link", widget: "string", required: false}
