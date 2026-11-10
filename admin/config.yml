@@ -22,6 +22,7 @@ collections:
         widget: "list"
         fields:
           - {label: "Название песни", name: "track_title", widget: "string"}
+          - {label: "Обложка песни", name: "track_cover", widget: "image", required: false}
           - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
           - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
           
