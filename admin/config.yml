@@ -7,35 +7,33 @@ media_folder: "assets/uploads"
 public_folder: "assets/uploads"
 
 collections:
-  - name: "music"
-    label: "Альбомы и Песни"
-    folder: "content/music"
-    create: true
-    format: "json"
-    extension: "json"
-    slug: "{{slug}}"
-    fields:
-      - {label: "Название альбома (или сингла)", name: "title", widget: "string"}
-      - {label: "Обложка альбома", name: "cover", widget: "image"}
-      - label: "Песни в этом альбоме"
-        name: "tracks"
-        widget: "list"
-        fields:
-          - {label: "Название песни", name: "track_title", widget: "string"}
-          - {label: "Обложка песни", name: "track_cover", widget: "image", required: false}
-          - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
-          - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
-          
-  - name: "settings"
-    label: "Настройки сайта"
+  - name: "database"
+    label: "База данных сайта"
     files:
-      - label: "Контент и дизайн"
-        name: "general"
+      - label: "🎵 Моя Музыка (Альбомы и треки)"
+        name: "music"
+        file: "content/music.json"
+        fields:
+          - label: "Мои альбомы и релизы"
+            name: "albums"
+            widget: "list"
+            fields:
+              - {label: "Название альбома/сингла", name: "title", widget: "string"}
+              - {label: "Обложка альбома", name: "cover", widget: "image"}
+              - label: "Список песен в альбоме"
+                name: "tracks"
+                widget: "list"
+                fields:
+                  - {label: "Название песни", name: "track_title", widget: "string"}
+                  - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
+                  - {label: "Обложка песни", name: "track_cover", widget: "image", required: false}
+
+      - label: "⚙️ Настройки сайта"
+        name: "settings"
         file: "content/settings.json"
         fields:
-          - {label: "Главное фото (где вы на стуле)", name: "main_photo", widget: "image", required: false}
+          - {label: "Главное фото (на стуле)", name: "main_photo", widget: "image", required: false}
           - {label: "Текст 'О певице'", name: "about_text", widget: "text", required: false}
-          - {label: "Своя иконка ВКонтакте", name: "vk_icon", widget: "image", required: false}
-          - {label: "Ссылка на ВКонтакте", name: "vk_link", widget: "string", required: false}
-          - {label: "Ссылка на Яндекс Музыку", name: "yandex_link", widget: "string", required: false}
+          - {label: "Ссылка ВКонтакте", name: "vk_link", widget: "string", required: false}
+          - {label: "Ссылка Яндекс Музыка", name: "yandex_link", widget: "string", required: false}
           - {label: "Ссылка на Telegram стикеры", name: "tg_link", widget: "string", required: false}
