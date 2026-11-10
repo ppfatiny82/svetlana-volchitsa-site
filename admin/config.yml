@@ -2,24 +2,39 @@ backend:
   name: github
   repo: ppfatiny82/svetlana-volchitsa-site
   branch: main
-  
 
-media_folder: "uploads"
-public_folder: "uploads"
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
 
 collections:
-  - name: "content"
-    label: "Контент сайта"
-    files:
-      - label: "Плейлист"
-        name: "playlist"
-        file: "playlist.json"
+  - name: "music"
+    label: "Альбомы и Песни"
+    folder: "content/music"
+    create: true
+    format: "json"
+    extension: "json"
+    slug: "{{slug}}"
+    fields:
+      - {label: "Название альбома (или сингла)", name: "title", widget: "string"}
+      - {label: "Обложка альбома", name: "cover", widget: "image"}
+      - label: "Песни в этом альбоме"
+        name: "tracks"
+        widget: "list"
         fields:
-          - label: "Мои песни"
-            name: "tracks"
-            widget: "list"
-            fields:
-              - {label: "Название трека", name: "title", widget: "string"}
-              - {label: "Аудиофайл (WAV/MP3)", name: "audio", widget: "file"}
-              - {label: "Обложка", name: "cover", widget: "image"}
-              - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
+          - {label: "Название песни", name: "track_title", widget: "string"}
+          - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
+          - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
+          
+  - name: "settings"
+    label: "Настройки сайта"
+    files:
+      - label: "Контент и дизайн"
+        name: "general"
+        file: "content/settings.json"
+        fields:
+          - {label: "Главное фото (где вы на стуле)", name: "main_photo", widget: "image", required: false}
+          - {label: "Текст 'О певице'", name: "about_text", widget: "text", required: false}
+          - {label: "Своя иконка ВКонтакте", name: "vk_icon", widget: "image", required: false}
+          - {label: "Ссылка на ВКонтакте", name: "vk_link", widget: "string", required: false}
+          - {label: "Ссылка на Яндекс Музыку", name: "yandex_link", widget: "string", required: false}
+          - {label: "Ссылка на Telegram стикеры", name: "tg_link", widget: "string", required: false}
