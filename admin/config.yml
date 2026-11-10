@@ -8,7 +8,7 @@ public_folder: "assets/uploads"
 
 collections:
   - name: "database"
-    label: "Базы данных"
+    label: "База данных сайта"
     files:
       - label: "🎵 Моя Музыка (Альбомы)"
         name: "music"
@@ -27,3 +27,15 @@ collections:
                   - {label: "Название песни", name: "track_title", widget: "string"}
                   - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
                   - {label: "Обложка песни", name: "track_cover", widget: "image", required: false}
+                  - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
+
+      - label: "⚙️ Настройки сайта"
+        name: "settings"
+        file: "content/settings.json"
+        fields:
+          - {label: "Главное фото (на стуле)", name: "main_photo", widget: "image", required: false}
+          - {label: "Текст 'О певице'", name: "about_text", widget: "text", required: false}
+          - {label: "Своя иконка ВКонтакте", name: "vk_icon", widget: "image", required: false}
+          - {label: "Ссылка ВКонтакте", name: "vk_link", widget: "string", required: false}
+          - {label: "Ссылка Яндекс Музыка", name: "yandex_link", widget: "string", required: false}
+          - {label: "Ссылка на Telegram стикеры", name: "tg_link", widget: "string", required: false}
