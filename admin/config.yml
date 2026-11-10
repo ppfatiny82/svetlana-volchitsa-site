@@ -2,7 +2,7 @@ backend:
   name: github
   repo: ppfatiny82/svetlana-volchitsa-site
   branch: main
-  app_id: "Ov23li6SQzSMwiEBuvBD"
+  
 
 media_folder: "uploads"
 public_folder: "uploads"
