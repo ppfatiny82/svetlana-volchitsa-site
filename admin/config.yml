@@ -10,7 +10,7 @@ collections:
   - name: "database"
     label: "База данных сайта"
     files:
-      - label: "🎵 Моя Музыка (Альбомы)"
+      - label: "🎵 Моя Музыка (Альбомы и треки)"
         name: "music"
         file: "content/music.json"
         fields:
@@ -26,14 +26,14 @@ collections:
                 fields:
                   - {label: "Название песни", name: "track_title", widget: "string"}
                   - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
-                  - {label: "Обложка песни", name: "track_cover", widget: "image", required: false}
+                  - {label: "Обложка песни (если отличается от альбома)", name: "track_cover", widget: "image", required: false}
                   - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
 
       - label: "⚙️ Настройки сайта"
         name: "settings"
         file: "content/settings.json"
         fields:
-          - {label: "Главное фото (на стуле)", name: "main_photo", widget: "image", required: false}
+          - {label: "Главное фото (где вы на стуле)", name: "main_photo", widget: "image", required: false}
           - {label: "Текст 'О певице'", name: "about_text", widget: "text", required: false}
           - {label: "Своя иконка ВКонтакте", name: "vk_icon", widget: "image", required: false}
           - {label: "Ссылка ВКонтакте", name: "vk_link", widget: "string", required: false}
