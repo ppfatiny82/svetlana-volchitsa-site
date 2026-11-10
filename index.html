@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СВЕТЛАНА ВОЛЧИЦА - Официальный сайт</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #d4af37; /* Золотой цвет для имени артиста */
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+        .player-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        img#cover {
+            width: 100%;
+            border-radius: 10px;
+            display: none; /* Скрыта, пока не выбрана песня с обложкой */
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            outline: none;
+        }
+        .playlist {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .track {
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 5px;
+        }
+        .track:hover {
+            background: #333;
+        }
+        #track-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .admin-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .admin-link:hover {
+            color: #d4af37;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>СВЕТЛАНА ВОЛЧИЦА</h1>
+
+    <div class="player-container">
+        <img id="cover" src="" alt="Обложка релиза">
+        <h2 id="track-title">Выберите песню</h2>
+        <audio id="audio-player" controls></audio>
+
+        <div class="playlist" id="playlist">
+            <!-- Сюда будут загружаться песни из админки -->
+            <p style="color: #888; text-align: center;">Загрузка плейлиста...</p>
+        </div>
+    </div>
+
+    <a href="/svetlana-volchitsa-site/admin/" class="admin-link">Вход в панель управления</a>
+
+    <script>
+        // Этот скрипт автоматически берет данные из вашей админки
+        fetch('playlist.json')
+            .then(response => response.json())
+            .then(data => {
+                const playlistDiv = document.getElementById('playlist');
+                const tracks = data.tracks || [];
+
+                if (tracks.length === 0) {
+                    playlistDiv.innerHTML = '<p style="color: #888; text-align: center;">Музыка скоро появится!<br>Зайдите в панель управления, чтобы добавить треки.</p>';
+                    return;
+                }
+
+                playlistDiv.innerHTML = ''; // Очищаем текст загрузки
+
+                tracks.forEach((track) => {
+                    const div = document.createElement('div');
+                    div.className = 'track';
+                    div.innerText = track.title;
+                    // При клике на песню - запускаем её
+                    div.onclick = () => playTrack(track);
+                    playlistDiv.appendChild(div);
+                });
+            })
+            .catch(error => {
+                document.getElementById('playlist').innerHTML = '<p style="color: red;">Ошибка загрузки плейлиста.</p>';
+                console.error(error);
+            });
+
+        function playTrack(track) {
+            document.getElementById('track-title').innerText = track.title;
+            const audioPlayer = document.getElementById('audio-player');
+            
+            // Если путь к аудиофайлу начинается с uploads, добавляем правильный путь
+            let audioPath = track.audio;
+            if (audioPath && !audioPath.startsWith('http')) {
+               audioPath = audioPath.startsWith('/') ? audioPath : '/' + audioPath;
+            }
+            audioPlayer.src = audioPath;
+
+            const coverImg = document.getElementById('cover');
+            if (track.cover) {
+                let coverPath = track.cover;
+                if (!coverPath.startsWith('http')) {
+                    coverPath = coverPath.startsWith('/') ? coverPath : '/' + coverPath;
+                }
+                coverImg.src = coverPath;
+                coverImg.style.display = 'block';
+            } else {
+                coverImg.style.display = 'none';
+            }
+
+            audioPlayer.play();
+        }
+    </script>
+</body>
+</html>
