@@ -1,0 +1,15 @@
+{
+  "albums": [
+    {
+      "title": "КРАСИВАЯ ЖИЗНЬ",
+      "cover": "https://picsum.photos/id/826/1920/1280.webp",
+      "tracks": [
+        {
+          "track_title": "Ночной дожор",
+          "audio": "/assets/uploads/ночной-дожор.mp3",
+          "track_cover": "/assets/uploads/code_generated_image-2-_compressed.jpeg"
+        }
+      ]
+    }
+  ]
+}
