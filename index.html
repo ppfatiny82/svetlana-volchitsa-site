@@ -1961,6 +1961,76 @@ if (document.readyState === 'loading') {
 } else {
     syncWithAdmin();
 }
+   // Оживление формы заказа песни
+function submitCustomSongOrder() {
+    const nameEl = document.getElementById('songUserName');
+    const phoneEl = document.getElementById('songUserPhone');
+    const occasionEl = document.getElementById('songOccasion');
+    const styleEl = document.getElementById('songStyle');
+    const detailsEl = document.getElementById('songDetails');
+    const btn = document.getElementById('btnSubmitCustomSong');
+
+    const name = nameEl ? nameEl.value.trim() : '';
+    const phone = phoneEl ? phoneEl.value.trim() : '';
+    const occasion = occasionEl ? occasionEl.value : '';
+    const style = styleEl ? styleEl.value : '';
+    const details = detailsEl ? detailsEl.value.trim() : '';
+
+    if (!name) {
+        alert('Пожалуйста, укажите ваше имя.');
+        if (nameEl) nameEl.focus();
+        return;
+    }
+    if (!phone) {
+        alert('Пожалуйста, укажите ваш телефон или контакт в Telegram.');
+        if (phoneEl) phoneEl.focus();
+        return;
+    }
+
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span>Отправка заявки...</span>';
+    }
+
+    // Сообщение для Telegram со Светланой
+    const tgText = 'Здравствуйте, Светлана! Заказ авторской песни:\n' +
+                   '👤 Имя: ' + name + '\n' +
+                   '📞 Контакт: ' + phone + '\n' +
+                   '🎉 Повод: ' + occasion + '\n' +
+                   '🎵 Стиль: ' + style + '\n' +
+                   '📝 Пожелания: ' + (details || 'не указаны');
+
+    const tgUrl = 'https://t.me/svetlanavolchitsa?text=' + encodeURIComponent(tgText);
+
+    // Отправка копии на почту ppfatiny82@yandex.ru
+    fetch('https://formsubmit.co/ajax/ppfatiny82@yandex.ru', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            name: name,
+            phone: phone,
+            occasion: occasion,
+            style: style,
+            details: details || 'не указаны',
+            _subject: 'Новая заявка на авторскую песню: ' + name
+        })
+    }).catch(e => console.log('Email dispatch:', e)).finally(() => {
+        // Показываем клиенту зелёное окно успеха
+        const inputFields = document.getElementById('formInputFields');
+        const successBox = document.getElementById('formSuccessBox');
+        const successTgLink = document.getElementById('btnSuccessTgLink');
+
+        if (inputFields) inputFields.classList.add('hidden');
+        if (successBox) successBox.classList.remove('hidden');
+        if (successTgLink) successTgLink.href = tgUrl;
+
+        // Открываем диалог со Светланой в Telegram
+        window.open(tgUrl, '_blank');
+    });
+}     
 </script>
 </body>
 </html>
