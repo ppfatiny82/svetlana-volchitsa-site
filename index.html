@@ -2041,6 +2041,17 @@ function submitCustomSongOrder() {
         }
     });
 }
+    // Появление плавающего плеера при прокрутке вниз
+window.addEventListener('scroll', () => {
+    const sticky = document.getElementById('stickyBottomPlayer');
+    if (sticky) {
+        if (window.scrollY > 450) {
+            sticky.classList.remove('hidden');
+        } else {
+            sticky.classList.add('hidden');
+        }
+    }
+});    
 </script>
 </body>
 </html>
