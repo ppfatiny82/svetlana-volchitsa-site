@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: ppfatiny82/svetlana-volchitsa-site
   branch: main
 
 media_folder: "assets/uploads"
@@ -28,7 +29,7 @@ collections:
           - { label: "Band.link", name: "bandlink_link", widget: "string", required: false }
           - { label: "YouTube", name: "youtube_link", widget: "string", required: false }
           
-          # 6 стикеров: загрузка картинки и смена названия для каждого
+          # 6 стикеров: названия и картинки для каждого
           - { label: "Стикер 1 — Название", name: "sticker_1_title", widget: "string", default: "«Приветики!»", required: false }
           - { label: "Стикер 1 — Картинка", name: "sticker_1", widget: "image", required: false }
 
@@ -49,8 +50,6 @@ collections:
 
   - name: "music"
     label: "Дискография и треки"
-    folder: "content"
-    create: false
     files:
       - file: "content/music.json"
         label: "Список песен"
