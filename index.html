@@ -1961,7 +1961,7 @@ if (document.readyState === 'loading') {
 } else {
     syncWithAdmin();
 }
-   // Оживление формы заказа песни
+// Отправка заявки на песню через бота @sv_volchitsa_bot и на почту
 function submitCustomSongOrder() {
     const nameEl = document.getElementById('songUserName');
     const phoneEl = document.getElementById('songUserPhone');
@@ -1992,17 +1992,26 @@ function submitCustomSongOrder() {
         btn.innerHTML = '<span>Отправка заявки...</span>';
     }
 
-    // Сообщение для Telegram со Светланой
-    const tgText = 'Здравствуйте, Светлана! Заказ авторской песни:\n' +
-                   '👤 Имя: ' + name + '\n' +
-                   '📞 Контакт: ' + phone + '\n' +
-                   '🎉 Повод: ' + occasion + '\n' +
-                   '🎵 Стиль: ' + style + '\n' +
-                   '📝 Пожелания: ' + (details || 'не указаны');
+    // 1. Отправляем уведомление прямо вам в Telegram через вашего бота @sv_volchitsa_bot
+    const botToken = '9295546338:AAFnn44ytrtIpNItsICiHWUfkOoYiQ-riC4';
+    const chatId = '8631352075';
+    const tgNotification = '🔔 НОВАЯ ЗАЯВКА НА АВТОРСКУЮ ПЕСНЮ!\n\n' +
+                           '👤 Имя заказчика: ' + name + '\n' +
+                           '📞 Телефон: ' + phone + '\n' +
+                           '🎉 Повод: ' + occasion + '\n' +
+                           '🎵 Стиль музыки: ' + style + '\n' +
+                           '📝 Пожелания: ' + (details || 'не указаны');
 
-    const tgUrl = 'https://t.me/svetlanavolchitsa?text=' + encodeURIComponent(tgText);
+    fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: tgNotification
+        })
+    }).catch(e => console.log('TG Bot error:', e));
 
-    // Отправка копии на почту ppfatiny82@yandex.ru
+    // 2. Отправляем копию на почту ppfatiny82@yandex.ru
     fetch('https://formsubmit.co/ajax/ppfatiny82@yandex.ru', {
         method: 'POST',
         headers: {
@@ -2018,19 +2027,20 @@ function submitCustomSongOrder() {
             _subject: 'Новая заявка на авторскую песню: ' + name
         })
     }).catch(e => console.log('Email dispatch:', e)).finally(() => {
-        // Показываем клиенту зелёное окно успеха
+        // Показываем клиенту зелёное окно успешной отправки
         const inputFields = document.getElementById('formInputFields');
         const successBox = document.getElementById('formSuccessBox');
         const successTgLink = document.getElementById('btnSuccessTgLink');
 
         if (inputFields) inputFields.classList.add('hidden');
         if (successBox) successBox.classList.remove('hidden');
-        if (successTgLink) successTgLink.href = tgUrl;
-
-        // Открываем диалог со Светланой в Telegram
-        window.open(tgUrl, '_blank');
+        if (successTgLink) {
+            successTgLink.href = 'https://t.me/sv_volchitsa_bot';
+            const span = successTgLink.querySelector('span');
+            if (span) span.textContent = 'Открыть бота @sv_volchitsa_bot в Telegram';
+        }
     });
-}     
+}
 </script>
 </body>
 </html>
