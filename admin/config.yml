@@ -81,7 +81,7 @@ collections:
               - { label: "Вопрос", name: "question", widget: "string" }
               - { label: "Ответ", name: "answer", widget: "text" }
 
-- name: "videos"
+  - name: "videos"
     label: "Видеоклипы на главной"
     files:
       - file: "content/videos.json"
@@ -91,7 +91,8 @@ collections:
           - { label: "1. Название клипа", name: "v1_title", widget: "string" }
           - { label: "1. Бейджик (Хит, Премьера...)", name: "v1_badge", widget: "string" }
           - { label: "1. Описание", name: "v1_desc", widget: "string" }
-          - { label: "1. Ссылка на YouTube", name: "v1_url", widget: "string" } 
+          - { label: "1. Ссылка на YouTube", name: "v1_url", widget: "string" }
+
           - { label: "2. Название клипа", name: "v2_title", widget: "string" }
           - { label: "2. Бейджик (Лирика, Драма...)", name: "v2_badge", widget: "string" }
           - { label: "2. Описание", name: "v2_desc", widget: "string" }
