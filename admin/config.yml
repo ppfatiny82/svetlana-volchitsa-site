@@ -80,6 +80,7 @@ collections:
             fields:
               - { label: "Вопрос", name: "question", widget: "string" }
               - { label: "Ответ", name: "answer", widget: "text" }
+
 - name: "videos"
     label: "Видеоклипы на главной"
     files:
