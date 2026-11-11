@@ -2041,12 +2041,21 @@ function submitCustomSongOrder() {
         }
     });
 }
-    // Красивый апгрейд нижнего плеера: золотая полоска и кнопка "Скачать MP3"
+    // Красивый апгрейд нижнего плеера: появление при прокрутке, золотая полоска и кнопка "Скачать MP3"
 function enhanceStickyPlayer() {
     const sticky = document.getElementById('stickyBottomPlayer');
     if (!sticky) return;
 
-    // 1. Добавляем тонкую золотую полоску перемотки на верхнюю кромку
+    // 1. Появление плеера при прокрутке вниз
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 450) {
+            sticky.classList.remove('hidden');
+        } else {
+            sticky.classList.add('hidden');
+        }
+    });
+
+    // 2. Добавляем тонкую золотую полоску перемотки на верхнюю кромку
     if (!document.getElementById('stickyProgressBar')) {
         const pBarContainer = document.createElement('div');
         pBarContainer.className = 'absolute top-0 inset-x-0 h-1 bg-zinc-800/80 cursor-pointer';
@@ -2062,7 +2071,7 @@ function enhanceStickyPlayer() {
         sticky.prepend(pBarContainer);
     }
 
-    // 2. Добавляем аккуратную кнопку "Скачать MP3" рядом с кнопкой "Текст"
+    // 3. Добавляем аккуратную кнопку "Скачать MP3" рядом с кнопкой "Текст"
     const lyricsBtn = document.getElementById('btnStickyLyrics');
     if (lyricsBtn && !document.getElementById('btnStickyDownload')) {
         const dlBtn = document.createElement('button');
@@ -2075,7 +2084,7 @@ function enhanceStickyPlayer() {
         lyricsBtn.after(dlBtn);
     }
 
-    // 3. Синхронизируем золотую полоску со звуком
+    // 4. Синхронизируем золотую полоску со звуком
     if (window.htmlAudio) {
         htmlAudio.addEventListener('timeupdate', () => {
             if (htmlAudio.duration && !isNaN(htmlAudio.duration)) {
