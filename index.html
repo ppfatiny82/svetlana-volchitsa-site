@@ -1879,6 +1879,88 @@ ${t.lyrics || 'Текст в обработке'}`], {type: 'text/plain;charset=
         } else {
             initializeApp();
         }
-    </script>
+  // ЧИСТЫЙ МОСТ: САЙТ СЛУШАЕТ ТОЛЬКО ВАШУ АДМИНКУ
+function syncWithAdmin() {
+    // 1. Читаем все фото, стикеры и ссылки, которые вы настроили в админке
+    fetch('content/settings.json?t=' + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(cfg => {
+            if (!cfg) return;
+
+            // Главное фото на обложке из вашей админки
+            if (cfg.hero_photo) {
+                const el = document.getElementById('heroSingerPhoto');
+                if (el) el.src = cfg.hero_photo.startsWith('/') ? cfg.hero_photo.slice(1) : cfg.hero_photo;
+            }
+
+            // Фото в блоке "О певице" из вашей админки
+            if (cfg.main_photo) {
+                const el = document.getElementById('aboutSingerPhoto');
+                if (el) el.src = cfg.main_photo.startsWith('/') ? cfg.main_photo.slice(1) : cfg.main_photo;
+            }
+
+            // Название сингла из вашей админки
+            if (cfg.featured_single_title) {
+                const el = document.getElementById('heroSingleTitle');
+                if (el) el.textContent = cfg.featured_single_title;
+            }
+
+            // Стикеры и названия, которые вы задали в админке
+            const sec = document.getElementById('stickers');
+            if (sec) {
+                const cards = sec.querySelectorAll('.grid > div');
+                cards.forEach((card, idx) => {
+                    const i = idx + 1;
+                    const img = card.querySelector('img');
+                    const span = card.querySelector('span');
+
+                    // Картинка стикера из админки
+                    if (cfg['sticker_' + i] && img) {
+                        const path = cfg['sticker_' + i];
+                        img.src = path.startsWith('/') ? path.slice(1) : path;
+                    }
+
+                    // Название стикера из админки
+                    const title = cfg['sticker_' + i + '_title'];
+                    if (title) {
+                        if (span) {
+                            span.textContent = title;
+                        } else {
+                            const newSpan = document.createElement('span');
+                            newSpan.className = 'text-xs font-bold text-zinc-300 block mt-2 text-center';
+                            newSpan.textContent = title;
+                            card.appendChild(newSpan);
+                        }
+                    }
+                });
+            }
+        }).catch(() => {});
+
+    // 2. Подключаем музыку и песню напрямую из вашей админки
+    fetch('content/music.json?t=' + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+            if (!data || !data.tracks || !data.tracks[0]) return;
+            const t = data.tracks[0];
+            const audioPath = t.file || t.audio;
+            if (audioPath) {
+                const cleanAudio = audioPath.startsWith('/') ? audioPath.slice(1) : audioPath;
+                if (window.htmlAudio) window.htmlAudio.src = encodeURI(cleanAudio);
+            }
+            if (t.cover) {
+                const cleanCover = t.cover.startsWith('/') ? t.cover.slice(1) : t.cover;
+                const coverEl = document.getElementById('mainCoverImg');
+                if (coverEl) coverEl.src = cleanCover;
+            }
+        }).catch(() => {});
+}
+
+// Запускаем мост связи при открытии сайта
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncWithAdmin);
+} else {
+    syncWithAdmin();
+}
+</script>
 </body>
 </html>
