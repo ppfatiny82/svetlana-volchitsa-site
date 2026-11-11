@@ -1879,6 +1879,66 @@ ${t.lyrics || 'Текст в обработке'}`], {type: 'text/plain;charset=
         } else {
             initializeApp();
         }
-    </script>
+    </script> 
+// 1. Оживление формы заказа
+function submitCustomSongOrder() {
+    const name = document.getElementById('songUserName')?.value?.trim();
+    const phone = document.getElementById('songUserPhone')?.value?.trim();
+    const occasion = document.getElementById('songOccasion')?.value || '';
+    const style = document.getElementById('songStyle')?.value || '';
+    const details = document.getElementById('songDetails')?.value?.trim() || '';
+
+    if (!name || !phone) {
+        alert('Пожалуйста, укажите ваше имя и телефон.');
+        return;
+    }
+
+    const btn = document.getElementById('btnSubmitCustomSong');
+    if (btn) btn.innerText = 'Отправка заявки...';
+
+    const tgText = 'Здравствуйте, Светлана! Заказ авторской песни:\n👤 Имя: ' + name + '\n📞 Контакт: ' + phone + '\n🎉 Повод: ' + occasion + '\n🎵 Стиль: ' + style + '\n📝 Пожелания: ' + (details || 'не указаны');
+    const tgUrl = 'https://t.me/svetlanavolchitsa?text=' + encodeURIComponent(tgText);
+
+    fetch('https://formsubmit.co/ajax/ppfatiny82@yandex.ru', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, occasion, style, details, _subject: 'Заявка на песню: ' + name })
+    }).catch(e => console.log(e)).finally(() => {
+        document.getElementById('formInputFields')?.classList.add('hidden');
+        document.getElementById('formSuccessBox')?.classList.remove('hidden');
+        window.open(tgUrl, '_blank');
+    });
+}
+
+// 2. Автоматический вывод названий стикеров из админки
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('content/settings.json?t=' + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(cfg => {
+            if (!cfg) return;
+            for (let i = 1; i <= 6; i++) {
+                const img = document.getElementById('stickerImg_' + i);
+                if (img) {
+                    if (cfg['sticker_' + i]) {
+                        const path = cfg['sticker_' + i];
+                        img.src = path.startsWith('/') ? path.slice(1) : path;
+                    }
+                    const title = cfg['sticker_' + i + '_title'];
+                    if (title) {
+                        let span = document.getElementById('stickerTitle_' + i);
+                        if (!span) {
+                            span = document.createElement('span');
+                            span.id = 'stickerTitle_' + i;
+                            span.className = 'text-xs font-bold text-zinc-300 block mt-2 text-center';
+                            const card = img.closest('.glass-card') || img.parentElement.parentElement;
+                            if (card) card.appendChild(span);
+                        }
+                        span.textContent = title;
+                    }
+                }
+            }
+        }).catch(() => {});
+});
+</script>
 </body>
 </html>
