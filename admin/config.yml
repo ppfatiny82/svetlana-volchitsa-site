@@ -1,68 +1,83 @@
 backend:
-  name: github
-  repo: ppfatiny82/svetlana-volchitsa-site
+  name: git-gateway
   branch: main
 
 media_folder: "assets/uploads"
-public_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
-  - name: "database"
-    label: "База данных сайта"
+  - name: "settings"
+    label: "Настройки и фото сайта"
     files:
-      - label: "🎵 Моя Музыка (Альбомы и треки)"
-        name: "music"
-        file: "content/music.json"
-        fields:
-          - label: "Мои альбомы и релизы"
-            name: "albums"
-            widget: "list"
-            fields:
-              - {label: "Название альбома/сингла", name: "title", widget: "string"}
-              - {label: "Обложка альбома", name: "cover", widget: "image"}
-              - label: "Список песен в альбоме"
-                name: "tracks"
-                widget: "list"
-                fields:
-                  - {label: "Название песни", name: "track_title", widget: "string"}
-                  - {label: "Обложка песни", name: "track_cover", widget: "image", required: false}
-                  - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
-                  - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
-
-      - label: "⚙️ Настройки и фото сайта"
+      - file: "content/settings.json"
+        label: "Основные данные и стикеры"
         name: "settings"
-        file: "content/settings.json"
         fields:
-          - {label: "Главное фото на обложке", name: "hero_photo", widget: "image", required: false}
-          - {label: "Фото в блоке 'О певице'", name: "main_photo", widget: "image", required: false}
-          - {label: "Текст 'О певице'", name: "about_text", widget: "text", required: false}
-          - {label: "Название свежего сингла на фото", name: "fresh_single_title", widget: "string", required: false}
-          - {label: "Ссылка на Telegram-канал", name: "tg_channel_link", widget: "string", required: false}
-          - {label: "Ссылка на ВКонтакте (Сообщество)", name: "vk_link", widget: "string", required: false}
-          - {label: "Ссылка на VK Музыку", name: "vk_music_link", widget: "string", required: false}
-          - {label: "Ссылка на Яндекс Музыку", name: "yandex_link", widget: "string", required: false}
-          - {label: "Ссылка на Звук (zvuk.com)", name: "zvuk_link", widget: "string", required: false}
-          - {label: "Ссылка на Apple Music", name: "apple_music_link", widget: "string", required: false}
-          - {label: "Ссылка на Spotify", name: "spotify_link", widget: "string", required: false}
-          - {label: "Ссылка на Band.link", name: "bandlink_link", widget: "string", required: false}
-          - {label: "Ссылка на YouTube", name: "youtube_link", widget: "string", required: false}
-          - {label: "Ссылка на стикерпак Telegram", name: "tg_stickers_link", widget: "string", required: false}
+          - { label: "Главное фото на обложке", name: "hero_photo", widget: "image", required: false }
+          - { label: "Фото в блоке 'О певице'", name: "main_photo", widget: "image", required: false }
+          - { label: "Текст 'О певице'", name: "about_text", widget: "text", required: false }
+          - { label: "Название свежего сингла на фото", name: "featured_single_title", widget: "string", default: "«Ночной дожор»", required: false }
+          - { label: "Ссылка на Telegram-канал", name: "tg_channel_link", widget: "string", required: false }
+          - { label: "Ссылка на стикерпак в Telegram", name: "tg_stickers_link", widget: "string", required: false }
+          - { label: "Сообщество ВКонтакте", name: "vk_link", widget: "string", required: false }
+          - { label: "VK Музыка", name: "vk_music_link", widget: "string", required: false }
+          - { label: "Яндекс Музыка", name: "yandex_link", widget: "string", required: false }
+          - { label: "Звук (Сбер)", name: "zvuk_link", widget: "string", required: false }
+          - { label: "Apple Music", name: "apple_music_link", widget: "string", required: false }
+          - { label: "Spotify", name: "spotify_link", widget: "string", required: false }
+          - { label: "Band.link", name: "bandlink_link", widget: "string", required: false }
+          - { label: "YouTube", name: "youtube_link", widget: "string", required: false }
           
-          # Управление 6 стикерами
-          - {label: "Стикер 1 («Приветики!»)", name: "sticker_1", widget: "image", required: false}
-          - {label: "Стикер 2 («Огонь!»)", name: "sticker_2", widget: "image", required: false}
-          - {label: "Стикер 3 («Букет роз»)", name: "sticker_3", widget: "image", required: false}
-          - {label: "Стикер 4 («Красивая жизнь»)", name: "sticker_4", widget: "image", required: false}
-          - {label: "Стикер 5 («С любовью»)", name: "sticker_5", widget: "image", required: false}
-          - {label: "Стикер 6 («Взгляд Волчицы»)", name: "sticker_6", widget: "image", required: false}
+          # 6 стикеров: загрузка картинки и смена названия для каждого
+          - { label: "Стикер 1 — Название", name: "sticker_1_title", widget: "string", default: "«Приветики!»", required: false }
+          - { label: "Стикер 1 — Картинка", name: "sticker_1", widget: "image", required: false }
 
-      - label: "❓ Вопросы и ответы (FAQ)"
-        name: "faq"
-        file: "content/faq.json"
+          - { label: "Стикер 2 — Название", name: "sticker_2_title", widget: "string", default: "«Огонь!»", required: false }
+          - { label: "Стикер 2 — Картинка", name: "sticker_2", widget: "image", required: false }
+
+          - { label: "Стикер 3 — Название", name: "sticker_3_title", widget: "string", default: "«Букет роз»", required: false }
+          - { label: "Стикер 3 — Картинка", name: "sticker_3", widget: "image", required: false }
+
+          - { label: "Стикер 4 — Название", name: "sticker_4_title", widget: "string", default: "«Красивая жизнь»", required: false }
+          - { label: "Стикер 4 — Картинка", name: "sticker_4", widget: "image", required: false }
+
+          - { label: "Стикер 5 — Название", name: "sticker_5_title", widget: "string", default: "«С любовью»", required: false }
+          - { label: "Стикер 5 — Картинка", name: "sticker_5", widget: "image", required: false }
+
+          - { label: "Стикер 6 — Название", name: "sticker_6_title", widget: "string", default: "«Взгляд Волчицы»", required: false }
+          - { label: "Стикер 6 — Картинка", name: "sticker_6", widget: "image", required: false }
+
+  - name: "music"
+    label: "Дискография и треки"
+    folder: "content"
+    create: false
+    files:
+      - file: "content/music.json"
+        label: "Список песен"
+        name: "tracks"
         fields:
-          - label: "Список вопросов и ответов"
-            name: "questions"
+          - label: "Песни"
+            name: "tracks"
             widget: "list"
             fields:
-              - {label: "Вопрос", name: "question", widget: "string"}
-              - {label: "Ответ", name: "answer", widget: "text"}
+              - { label: "Название песни", name: "title", widget: "string" }
+              - { label: "Альбом / Сингл", name: "album", widget: "string", default: "Сингл" }
+              - { label: "Год", name: "year", widget: "string", default: "2026" }
+              - { label: "Длительность", name: "duration", widget: "string", default: "3:30" }
+              - { label: "Обложка песни", name: "cover", widget: "image", required: false }
+              - { label: "Аудиофайл (MP3)", name: "file", widget: "file", required: true }
+              - { label: "Текст песни", name: "lyrics", widget: "text", required: false }
+
+  - name: "faq"
+    label: "Вопрос-ответ (FAQ)"
+    files:
+      - file: "content/faq.json"
+        label: "Вопросы и ответы"
+        name: "faq"
+        fields:
+          - label: "Список вопросов"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Вопрос", name: "question", widget: "string" }
+              - { label: "Ответ", name: "answer", widget: "text" }
