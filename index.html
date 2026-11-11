@@ -1879,8 +1879,8 @@ ${t.lyrics || 'Текст в обработке'}`], {type: 'text/plain;charset=
         } else {
             initializeApp();
         }
-    </script> 
-// 1. Оживление формы заказа
+ <script>
+// 1. Отправка заявки на песню в Telegram и на почту
 function submitCustomSongOrder() {
     const name = document.getElementById('songUserName')?.value?.trim();
     const phone = document.getElementById('songUserPhone')?.value?.trim();
@@ -1910,35 +1910,47 @@ function submitCustomSongOrder() {
     });
 }
 
-// 2. Автоматический вывод названий стикеров из админки
-window.addEventListener('DOMContentLoaded', () => {
+// 2. Бронебойный вывод стикеров и их названий из админки на сайт
+function applyStickersFromAdmin() {
     fetch('content/settings.json?t=' + Date.now())
         .then(r => r.ok ? r.json() : null)
         .then(cfg => {
             if (!cfg) return;
-            for (let i = 1; i <= 6; i++) {
-                const img = document.getElementById('stickerImg_' + i);
-                if (img) {
-                    if (cfg['sticker_' + i]) {
-                        const path = cfg['sticker_' + i];
-                        img.src = path.startsWith('/') ? path.slice(1) : path;
-                    }
-                    const title = cfg['sticker_' + i + '_title'];
-                    if (title) {
-                        let span = document.getElementById('stickerTitle_' + i);
-                        if (!span) {
-                            span = document.createElement('span');
-                            span.id = 'stickerTitle_' + i;
-                            span.className = 'text-xs font-bold text-zinc-300 block mt-2 text-center';
-                            const card = img.closest('.glass-card') || img.parentElement.parentElement;
-                            if (card) card.appendChild(span);
-                        }
+            const sec = document.getElementById('stickers');
+            if (!sec) return;
+            const cards = sec.querySelectorAll('.grid > div');
+            cards.forEach((card, idx) => {
+                const i = idx + 1;
+                const img = card.querySelector('img');
+                const span = card.querySelector('span');
+
+                // Подставляем новую картинку стикера из админки
+                if (cfg['sticker_' + i] && img) {
+                    let p = cfg['sticker_' + i].trim();
+                    img.src = p.startsWith('/') ? p.slice(1) : p;
+                }
+
+                // Подставляем новое название стикера из админки
+                const title = cfg['sticker_' + i + '_title'];
+                if (title) {
+                    if (span) {
                         span.textContent = title;
+                    } else {
+                        const newSpan = document.createElement('span');
+                        newSpan.className = 'text-xs font-bold text-zinc-300 block mt-2 text-center';
+                        newSpan.textContent = title;
+                        card.appendChild(newSpan);
                     }
                 }
-            }
-        }).catch(() => {});
-});
+            });
+        }).catch(err => console.log('Stickers update:', err));
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyStickersFromAdmin);
+} else {
+    applyStickersFromAdmin();
+}
 </script>
 </body>
 </html>
