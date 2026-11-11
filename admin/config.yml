@@ -29,7 +29,7 @@ collections:
                   - {label: "Аудиофайл (MP3)", name: "audio", widget: "file"}
                   - {label: "Текст песни", name: "lyrics", widget: "text", required: false}
 
-      - label: "⚙️ Настройки сайта"
+      - label: "⚙️ Настройки и фото сайта"
         name: "settings"
         file: "content/settings.json"
         fields:
@@ -37,7 +37,7 @@ collections:
           - {label: "Фото в блоке 'О певице'", name: "main_photo", widget: "image", required: false}
           - {label: "Текст 'О певице'", name: "about_text", widget: "text", required: false}
           - {label: "Название свежего сингла на фото", name: "fresh_single_title", widget: "string", required: false}
-          - {label: "Подпись под свежим синглом", name: "fresh_single_desc", widget: "string", required: false}
+          - {label: "Ссылка на Telegram-канал", name: "tg_channel_link", widget: "string", required: false}
           - {label: "Ссылка на ВКонтакте (Сообщество)", name: "vk_link", widget: "string", required: false}
           - {label: "Ссылка на VK Музыку", name: "vk_music_link", widget: "string", required: false}
           - {label: "Ссылка на Яндекс Музыку", name: "yandex_link", widget: "string", required: false}
@@ -46,5 +46,15 @@ collections:
           - {label: "Ссылка на Spotify", name: "spotify_link", widget: "string", required: false}
           - {label: "Ссылка на Band.link", name: "bandlink_link", widget: "string", required: false}
           - {label: "Ссылка на YouTube", name: "youtube_link", widget: "string", required: false}
-          - {label: "Ссылка на Telegram-канал", name: "tg_channel_link", widget: "string", required: false}
           - {label: "Ссылка на стикерпак Telegram", name: "tg_stickers_link", widget: "string", required: false}
+
+      - label: "❓ Вопросы и ответы (FAQ)"
+        name: "faq"
+        file: "content/faq.json"
+        fields:
+          - label: "Список вопросов и ответов"
+            name: "questions"
+            widget: "list"
+            fields:
+              - {label: "Вопрос", name: "question", widget: "string"}
+              - {label: "Ответ", name: "answer", widget: "text"}
