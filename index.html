@@ -2276,6 +2276,69 @@ if (document.readyState === 'loading') {
 } else {
     enhanceStickyPlayer();
 }
+    // Автоматическая загрузка клипов из админки
+async function loadAdminVideos() {
+  try {
+    const res = await fetch('content/videos.json?v=' + Date.now());
+    if (!res.ok) return;
+    const data = await res.json();
+    const container = document.querySelector('#videos .grid');
+    if (!container) return;
+
+    const clips = [
+      { title: data.v1_title, badge: data.v1_badge, desc: data.v1_desc, url: data.v1_url },
+      { title: data.v2_title, badge: data.v2_badge, desc: data.v2_desc, url: data.v2_url },
+      { title: data.v3_title, badge: data.v3_badge, desc: data.v3_desc, url: data.v3_url },
+      { title: data.v4_title, badge: data.v4_badge, desc: data.v4_desc, url: data.v4_url }
+    ];
+
+    function extractYtId(url) {
+      if (!url) return '';
+      const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return m ? m[1] : url.trim();
+    }
+
+    container.innerHTML = clips.map((c, i) => {
+      const ytid = extractYtId(c.url);
+      const isLirika = (c.badge || '').toLowerCase().includes('лирик') || (c.badge || '').toLowerCase().includes('драм');
+      const badgeClass = isLirika 
+        ? 'bg-purple-900/90 text-purple-200 border border-purple-500/40' 
+        : (i === 0 ? 'bg-gold text-zinc-950' : 'bg-crimson text-white');
+      const iconClass = isLirika ? 'bg-crimson' : (i === 3 ? 'bg-purple-600' : 'bg-gold text-zinc-950');
+
+      return `
+        <div class="glass-card rounded-2xl overflow-hidden border border-zinc-800 hover:border-gold/50 transition-all group flex flex-col">
+          <div class="relative aspect-video bg-zinc-900 overflow-hidden cursor-pointer" onclick="openVideoModal('${ytid}', '${(c.title || '').replace(/'/g, "\\'")}')">
+            <img src="https://img.youtube.com/vi/${ytid}/hqdefault.jpg" alt="${c.title || ''}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+              <div class="w-12 h-12 rounded-full ${iconClass} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            ${c.badge ? `<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded ${badgeClass} font-bold text-[10px] uppercase tracking-wider">${c.badge}</span>` : ''}
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="text-sm font-bold text-white group-hover:text-gold transition-colors">${c.title || ''}</h4>
+              <p class="text-xs text-zinc-400 mt-1">${c.desc || ''}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+              <button onclick="openVideoModal('${ytid}', '${(c.title || '').replace(/'/g, "\\'")}')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
+                ▶ Смотреть клип
+              </button>
+              <a href="${c.url && c.url.startsWith('http') ? c.url : 'https://www.youtube.com/watch?v=' + ytid}" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">
+                YouTube ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch (e) {
+    console.log('loadAdminVideos:', e);
+  }
+}
+loadAdminVideos();    
      // Открытие и закрытие окна с видеоклипом
 function openVideoModal(ytId, title) {
     const modal = document.getElementById('videoModal');
