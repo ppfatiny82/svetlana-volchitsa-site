@@ -2041,7 +2041,7 @@ function submitCustomSongOrder() {
         }
     });
 }
-    // Красивый апгрейд нижнего плеера: появление при прокрутке, золотая полоска и кнопка "Скачать MP3"
+  // Красивый апгрейд нижнего плеера: появление при прокрутке, золотая полоска и кнопка "Скачать MP3"
 function enhanceStickyPlayer() {
     const sticky = document.getElementById('stickyBottomPlayer');
     if (!sticky) return;
@@ -2055,13 +2055,13 @@ function enhanceStickyPlayer() {
         }
     });
 
-    // 2. Добавляем тонкую золотую полоску перемотки на верхнюю кромку
+    // 2. Золотая полоска перемотки с сиянием прямо по верхней кромке плеера
     if (!document.getElementById('stickyProgressBar')) {
         const pBarContainer = document.createElement('div');
-        pBarContainer.className = 'absolute top-0 inset-x-0 h-1 bg-zinc-800/80 cursor-pointer';
-        pBarContainer.innerHTML = '<div id="stickyProgressBar" class="h-full bg-gradient-to-r from-gold to-amber-400 w-0 transition-all duration-150"></div>';
+        pBarContainer.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; height: 4px; background: rgba(39, 39, 42, 0.8); cursor: pointer; z-index: 50;';
+        pBarContainer.innerHTML = '<div id="stickyProgressBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #D4AF37, #FFE082); box-shadow: 0 0 10px rgba(212, 175, 55, 0.8); transition: width 0.15s linear;"></div>';
         pBarContainer.onclick = (e) => {
-            if (window.htmlAudio && htmlAudio.duration) {
+            if (typeof htmlAudio !== 'undefined' && htmlAudio.duration) {
                 const rect = pBarContainer.getBoundingClientRect();
                 const pos = (e.clientX - rect.left) / rect.width;
                 htmlAudio.currentTime = pos * htmlAudio.duration;
@@ -2071,7 +2071,7 @@ function enhanceStickyPlayer() {
         sticky.prepend(pBarContainer);
     }
 
-    // 3. Добавляем аккуратную кнопку "Скачать MP3" рядом с кнопкой "Текст"
+    // 3. Аккуратная кнопка "Скачать MP3" рядом с кнопкой "Текст"
     const lyricsBtn = document.getElementById('btnStickyLyrics');
     if (lyricsBtn && !document.getElementById('btnStickyDownload')) {
         const dlBtn = document.createElement('button');
@@ -2084,8 +2084,8 @@ function enhanceStickyPlayer() {
         lyricsBtn.after(dlBtn);
     }
 
-    // 4. Синхронизируем золотую полоску со звуком
-    if (window.htmlAudio) {
+    // 4. Прямая связь золотой полоски со звуком песни
+    if (typeof htmlAudio !== 'undefined') {
         htmlAudio.addEventListener('timeupdate', () => {
             if (htmlAudio.duration && !isNaN(htmlAudio.duration)) {
                 const p = (htmlAudio.currentTime / htmlAudio.duration) * 100;
