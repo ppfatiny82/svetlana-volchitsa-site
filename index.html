@@ -2041,13 +2041,14 @@ function submitCustomSongOrder() {
         }
     });
 }
-  // Красивый апгрейд нижнего плеера: появление при прокрутке, золотая полоска и кнопка "Скачать MP3"
+ // Нижний плеер: золотая полоска, кнопка скачивания, крестик закрытия + кнопка лицензии
 function enhanceStickyPlayer() {
     const sticky = document.getElementById('stickyBottomPlayer');
     if (!sticky) return;
 
-    // 1. Появление плеера при прокрутке вниз
+    // 1. Появление плеера при прокрутке (если его не закрыли крестиком)
     window.addEventListener('scroll', () => {
+        if (sticky.dataset.userClosed) return;
         if (window.scrollY > 450) {
             sticky.classList.remove('hidden');
         } else {
@@ -2055,7 +2056,7 @@ function enhanceStickyPlayer() {
         }
     });
 
-    // 2. Золотая полоска перемотки с сиянием прямо по верхней кромке плеера
+    // 2. Золотая полоска перемотки прямо по верху плеера
     if (!document.getElementById('stickyProgressBar')) {
         const pBarContainer = document.createElement('div');
         pBarContainer.style.cssText = 'position: absolute; top: 0; left: 0; right: 0; height: 4px; background: rgba(39, 39, 42, 0.8); cursor: pointer; z-index: 50;';
@@ -2071,7 +2072,7 @@ function enhanceStickyPlayer() {
         sticky.prepend(pBarContainer);
     }
 
-    // 3. Аккуратная кнопка "Скачать MP3" рядом с кнопкой "Текст"
+    // 3. Кнопка "Скачать MP3"
     const lyricsBtn = document.getElementById('btnStickyLyrics');
     if (lyricsBtn && !document.getElementById('btnStickyDownload')) {
         const dlBtn = document.createElement('button');
@@ -2084,7 +2085,22 @@ function enhanceStickyPlayer() {
         lyricsBtn.after(dlBtn);
     }
 
-    // 4. Прямая связь золотой полоски со звуком песни
+    // 4. Аккуратный крестик закрытия плеера (✕)
+    if (!document.getElementById('btnStickyClose')) {
+        const closeBtn = document.createElement('button');
+        closeBtn.id = 'btnStickyClose';
+        closeBtn.className = 'text-zinc-500 hover:text-white p-1.5 ml-2 transition-colors';
+        closeBtn.title = 'Скрыть плеер';
+        closeBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>';
+        closeBtn.onclick = () => {
+            sticky.classList.add('hidden');
+            sticky.dataset.userClosed = 'true';
+        };
+        const rightControls = sticky.querySelector('.flex.items-center.gap-2, .flex.items-center.gap-3:last-child');
+        if (rightControls) rightControls.appendChild(closeBtn);
+    }
+
+    // 5. Синхронизация золотой полоски со звуком
     if (typeof htmlAudio !== 'undefined') {
         htmlAudio.addEventListener('timeupdate', () => {
             if (htmlAudio.duration && !isNaN(htmlAudio.duration)) {
@@ -2093,6 +2109,12 @@ function enhanceStickyPlayer() {
                 if (bar) bar.style.width = p + '%';
             }
         });
+    }
+
+    // 6. Оживляем кнопку лицензии "Читать текст соглашения"
+    const licBtn = document.getElementById('btnOpenFullLicenseModal');
+    if (licBtn && typeof openLicenseModal === 'function') {
+        licBtn.onclick = openLicenseModal;
     }
 }
 
