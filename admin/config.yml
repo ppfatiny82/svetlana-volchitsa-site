@@ -47,6 +47,14 @@ collections:
           - {label: "Ссылка на Band.link", name: "bandlink_link", widget: "string", required: false}
           - {label: "Ссылка на YouTube", name: "youtube_link", widget: "string", required: false}
           - {label: "Ссылка на стикерпак Telegram", name: "tg_stickers_link", widget: "string", required: false}
+          
+          # Управление 6 стикерами
+          - {label: "Стикер 1 («Приветики!»)", name: "sticker_1", widget: "image", required: false}
+          - {label: "Стикер 2 («Огонь!»)", name: "sticker_2", widget: "image", required: false}
+          - {label: "Стикер 3 («Букет роз»)", name: "sticker_3", widget: "image", required: false}
+          - {label: "Стикер 4 («Красивая жизнь»)", name: "sticker_4", widget: "image", required: false}
+          - {label: "Стикер 5 («С любовью»)", name: "sticker_5", widget: "image", required: false}
+          - {label: "Стикер 6 («Взгляд Волчицы»)", name: "sticker_6", widget: "image", required: false}
 
       - label: "❓ Вопросы и ответы (FAQ)"
         name: "faq"
