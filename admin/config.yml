@@ -48,7 +48,7 @@ collections:
           - { label: "Стикер 6 — Название", name: "sticker_6_title", widget: "string", default: "«Взгляд Волчицы»", required: false }
           - { label: "Стикер 6 — Картинка", name: "sticker_6", widget: "image", required: false }
 
- - name: "music"
+   - name: "music"
     label: "Дискография и треки"
     files:
       - file: "playlist.json"
