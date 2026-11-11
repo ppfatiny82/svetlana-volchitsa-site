@@ -484,7 +484,160 @@
             <div id="trackListContainer" class="space-y-3"></div>
         </div>
     </section>
+<!-- 4.1. СЕКЦИЯ ВИДЕОКЛИПОВ -->
+    <section id="videos" class="relative z-10 py-16 bg-stage border-t border-zinc-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-crimson/15 text-crimson text-xs font-bold uppercase tracking-wider mb-2">
+                        Официальные видеоклипы
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+                        Видеоклипы Светланы Волчицы
+                    </h2>
+                    <p class="text-sm sm:text-base text-zinc-400 mt-1">
+                        Смотрите премьеры, студийные клипы и живые видео
+                    </p>
+                </div>
+                
+                <a href="https://www.youtube.com/watch?v=Q3bOVHh_jgY" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-zinc-400 hover:text-white px-4 py-2.5 rounded-xl bg-panel border border-zinc-700/80 hover:border-crimson/50 transition-all">
+                    <svg class="w-4 h-4 text-crimson fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <span>YouTube артиста →</span>
+                </a>
+            </div>
 
+            <!-- Сетка 4 клипов -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- 1. Волки -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-zinc-800 hover:border-gold/50 transition-all group flex flex-col">
+                    <div class="relative aspect-video bg-zinc-900 overflow-hidden cursor-pointer" onclick="openVideoModal('Q3bOVHh_jgY', 'Светлана Волчица — Волки 🐺')">
+                        <img src="https://img.youtube.com/vi/Q3bOVHh_jgY/hqdefault.jpg" alt="Клип Волки" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-gold text-zinc-950 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                        <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-gold text-zinc-950 font-bold text-[10px] uppercase tracking-wider">
+                            Хит
+                        </span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-gold transition-colors">Светлана Волчица — «Волки» 🐺</h4>
+                            <p class="text-xs text-zinc-400 mt-1">Официальный музыкальный клип</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                            <button onclick="openVideoModal('Q3bOVHh_jgY', 'Светлана Волчица — Волки 🐺')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
+                                ▶ Смотреть клип
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=Q3bOVHh_jgY" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">
+                                YouTube ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Танцую до рассвета -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-zinc-800 hover:border-gold/50 transition-all group flex flex-col">
+                    <div class="relative aspect-video bg-zinc-900 overflow-hidden cursor-pointer" onclick="openVideoModal('S-cffm6gY3E', 'Светлана Волчица — Танцую до рассвета')">
+                        <img src="https://img.youtube.com/vi/S-cffm6gY3E/hqdefault.jpg" alt="Клип Танцую до рассвета" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-crimson text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                        <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-crimson text-white font-bold text-[10px] uppercase tracking-wider">
+                            Танцевальный
+                        </span>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-gold transition-colors">«Танцую до рассвета»</h4>
+                            <p class="text-xs text-zinc-400 mt-1">Премьера клипа • Драйв и танцы</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                            <button onclick="openVideoModal('S-cffm6gY3E', 'Светлана Волчица — Танцую до рассвета')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
+                                ▶ Смотреть клип
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=S-cffm6gY3E" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">
+                                YouTube ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Липучка -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-zinc-800 hover:border-gold/50 transition-all group flex flex-col">
+                    <div class="relative aspect-video bg-zinc-900 overflow-hidden cursor-pointer" onclick="openVideoModal('escrah55SUA', 'Светлана Волчица — Липучка')">
+                        <img src="https://img.youtube.com/vi/escrah55SUA/hqdefault.jpg" alt="Клип Липучка" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-gold text-zinc-950 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-gold transition-colors">«Липучка»</h4>
+                            <p class="text-xs text-zinc-400 mt-1">Музыкальный клип • Душевная лирика</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                            <button onclick="openVideoModal('escrah55SUA', 'Светлана Волчица — Липучка')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
+                                ▶ Смотреть клип
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=escrah55SUA" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">
+                                YouTube ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Черное солнце -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-zinc-800 hover:border-gold/50 transition-all group flex flex-col">
+                    <div class="relative aspect-video bg-zinc-900 overflow-hidden cursor-pointer" onclick="openVideoModal('6dzoO6QXn28', 'Светлана Волчица — Черное солнце')">
+                        <img src="https://img.youtube.com/vi/6dzoO6QXn28/hqdefault.jpg" alt="Клип Черное солнце" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-sm font-bold text-white group-hover:text-gold transition-colors">«Черное солнце»</h4>
+                            <p class="text-xs text-zinc-400 mt-1">Музыкальная драма • Премьера</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                            <button onclick="openVideoModal('6dzoO6QXn28', 'Светлана Волчица — Черное солнце')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
+                                ▶ Смотреть клип
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=6dzoO6QXn28" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">
+                                YouTube ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ВСПЛЫВАЮЩЕЕ ОКНО ДЛЯ ПРОСМОТРА КЛИПА -->
+    <div id="videoModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative w-full max-w-4xl bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-700 shadow-2xl">
+            <div class="flex items-center justify-between p-4 border-b border-zinc-800 bg-panel">
+                <h4 id="videoModalTitle" class="text-base font-bold text-white truncate">Клип</h4>
+                <button onclick="closeVideoModal()" class="text-zinc-400 hover:text-white p-2 rounded-xl transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="relative aspect-video bg-black">
+                <iframe id="videoModalIframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
     <!-- 5. ABOUT THE SINGER SECTION -->
     <section id="about" class="relative z-10 py-20 bg-stage border-t border-zinc-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -2123,6 +2276,24 @@ if (document.readyState === 'loading') {
 } else {
     enhanceStickyPlayer();
 }
+     // Открытие и закрытие окна с видеоклипом
+function openVideoModal(ytId, title) {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoModalIframe');
+    const titleEl = document.getElementById('videoModalTitle');
+    if (titleEl) titleEl.textContent = title;
+    if (iframe) iframe.src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1';
+    if (modal) modal.classList.remove('hidden');
+    // Ставим песню в плеере на паузу, чтобы звуки не смешивались
+    if (typeof pauseTrack === 'function') pauseTrack();
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoModalIframe');
+    if (iframe) iframe.src = '';
+    if (modal) modal.classList.add('hidden');
+}   
 </script>
 </body>
 </html>
