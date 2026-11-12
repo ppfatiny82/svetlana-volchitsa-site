@@ -2118,6 +2118,8 @@ function syncWithAdmin() {
             // Название сингла из вашей админки
             if (cfg.featured_single_title) {
                 const cleanTitle = cfg.featured_single_title.replace(/[«»"]/g, '').trim();
+                window.siteSettings = window.siteSettings || {};
+                window.siteSettings.fresh_single_title = cleanTitle;
                 const el = document.getElementById('heroSingleTitle');
                 if (el) el.textContent = `«${cleanTitle}»`;
                 const btnEl = document.getElementById('btnPlayFeaturedHitText');
