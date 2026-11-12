@@ -109,21 +109,25 @@ collections:
           - { label: "1. Бейджик (Хит, Премьера...)", name: "v1_badge", widget: "string" }
           - { label: "1. Описание", name: "v1_desc", widget: "string" }
           - { label: "1. Ссылка на YouTube", name: "v1_url", widget: "string" }
+          - { label: "1. Ссылка на ВК Видео (необязательно)", name: "v1_vk", widget: "string", required: false }
 
           - { label: "2. Название клипа", name: "v2_title", widget: "string" }
           - { label: "2. Бейджик (Лирика, Драма...)", name: "v2_badge", widget: "string" }
           - { label: "2. Описание", name: "v2_desc", widget: "string" }
           - { label: "2. Ссылка на YouTube", name: "v2_url", widget: "string" }
+          - { label: "2. Ссылка на ВК Видео (необязательно)", name: "v2_vk", widget: "string", required: false }
 
           - { label: "3. Название клипа", name: "v3_title", widget: "string" }
           - { label: "3. Бейджик", name: "v3_badge", widget: "string" }
           - { label: "3. Описание", name: "v3_desc", widget: "string" }
           - { label: "3. Ссылка на YouTube", name: "v3_url", widget: "string" }
+          - { label: "3. Ссылка на ВК Видео (необязательно)", name: "v3_vk", widget: "string", required: false }
 
           - { label: "4. Название клипа", name: "v4_title", widget: "string" }
           - { label: "4. Бейджик", name: "v4_badge", widget: "string" }
           - { label: "4. Описание", name: "v4_desc", widget: "string" }
           - { label: "4. Ссылка на YouTube", name: "v4_url", widget: "string" }
+          - { label: "4. Ссылка на ВК Видео (необязательно)", name: "v4_vk", widget: "string", required: false }
       - file: "content/all_videos.json"
         label: "Все клипы (отдельная страница)"
         name: "all_videos"
