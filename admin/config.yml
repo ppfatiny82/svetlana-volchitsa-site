@@ -124,3 +124,15 @@ collections:
           - { label: "4. Бейджик", name: "v4_badge", widget: "string" }
           - { label: "4. Описание", name: "v4_desc", widget: "string" }
           - { label: "4. Ссылка на YouTube", name: "v4_url", widget: "string" }
+        - file: "content/all_videos.json"
+          label: "Все клипы (отдельная страница)"
+          name: "all_videos"
+          fields:
+            - label: "Полный список клипов"
+              name: "items"
+              widget: "list"
+              fields:
+                - { label: "Название клипа", name: "title", widget: "string" }
+                - { label: "Бейджик (Хит, Премьера, Лирика...)", name: "badge", widget: "string", required: false }
+                - { label: "Описание", name: "desc", widget: "string", required: false }
+                - { label: "Ссылка на YouTube", name: "url", widget: "string" }
