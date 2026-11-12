@@ -2,7 +2,7 @@
   "albums": [
     {
       "title": "КРАСИВАЯ ЖИЗНЬ",
-      "cover": "https://picsum.photos/id/826/1920/1280.webp",
+      "cover": "/assets/uploads/Роскошная красивая жизнь.png",
       "tracks": [
         {
           "track_title": "Ночной дожор",
