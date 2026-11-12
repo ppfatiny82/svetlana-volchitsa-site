@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: ppfatiny82/svetlana-volchitsa-site
+  repo: svetlana-volchitsa/svetlana-volchitsa.github.io
   branch: main
 
 media_folder: "assets/uploads"
