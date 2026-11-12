@@ -49,40 +49,40 @@ collections:
           - { label: "Стикер 6 — Картинка", name: "sticker_6", widget: "image", required: false }
 
   - name: "music"
-      label: "Дискография и треки"
-      files:
-        - file: "content/music.json"
-          label: "Альбомы и песни"
-          name: "tracks"
-          fields:
-            - label: "Альбомы"
-              name: "albums"
-              widget: "list"
-              fields:
-                - { label: "Название альбома", name: "title", widget: "string", default: "КРАСИВАЯ ЖИЗНЬ" }
-                - { label: "Обложка альбома", name: "cover", widget: "image", required: false }
-                - label: "Песни альбома"
-                  name: "tracks"
-                  widget: "list"
-                  fields:
-                    - { label: "Название песни", name: "track_title", widget: "string" }
-                    - { label: "Обложка песни (если отличается от альбома)", name: "track_cover", widget: "image", required: false }
-                    - { label: "Аудиофайл (MP3)", name: "audio", widget: "file", required: true }
-                    - { label: "Длительность", name: "duration", widget: "string", default: "3:30", required: false }
-                    - { label: "Год", name: "year", widget: "string", default: "2026", required: false }
-                    - { label: "Текст песни", name: "lyrics", widget: "text", required: false }
-            - label: "Отдельные синглы (вне альбомов)"
-              name: "tracks"
-              widget: "list"
-              required: false
-              fields:
-                - { label: "Название песни", name: "title", widget: "string" }
-                - { label: "Альбом / Сингл", name: "album", widget: "string", default: "Сингл" }
-                - { label: "Год", name: "year", widget: "string", default: "2026" }
-                - { label: "Длительность", name: "duration", widget: "string", default: "3:30" }
-                - { label: "Обложка песни", name: "cover", widget: "image", required: false }
-                - { label: "Аудиофайл (MP3)", name: "file", widget: "file", required: true }
-                - { label: "Текст песни", name: "lyrics", widget: "text", required: false }
+    label: "Дискография и треки"
+    files:
+      - file: "content/music.json"
+        label: "Альбомы и песни"
+        name: "tracks"
+        fields:
+          - label: "Альбомы"
+            name: "albums"
+            widget: "list"
+            fields:
+              - { label: "Название альбома", name: "title", widget: "string", default: "КРАСИВАЯ ЖИЗНЬ" }
+              - { label: "Обложка альбома", name: "cover", widget: "image", required: false }
+              - label: "Песни альбома"
+                name: "tracks"
+                widget: "list"
+                fields:
+                  - { label: "Название песни", name: "track_title", widget: "string" }
+                  - { label: "Обложка песни (если отличается от альбома)", name: "track_cover", widget: "image", required: false }
+                  - { label: "Аудиофайл (MP3)", name: "audio", widget: "file", required: true }
+                  - { label: "Длительность", name: "duration", widget: "string", default: "3:30", required: false }
+                  - { label: "Год", name: "year", widget: "string", default: "2026", required: false }
+                  - { label: "Текст песни", name: "lyrics", widget: "text", required: false }
+          - label: "Отдельные синглы (вне альбомов)"
+            name: "tracks"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Название песни", name: "title", widget: "string" }
+              - { label: "Альбом / Сингл", name: "album", widget: "string", default: "Сингл" }
+              - { label: "Год", name: "year", widget: "string", default: "2026" }
+              - { label: "Длительность", name: "duration", widget: "string", default: "3:30" }
+              - { label: "Обложка песни", name: "cover", widget: "image", required: false }
+              - { label: "Аудиофайл (MP3)", name: "file", widget: "file", required: true }
+              - { label: "Текст песни", name: "lyrics", widget: "text", required: false }
 
   - name: "faq"
     label: "Вопрос-ответ (FAQ)"
