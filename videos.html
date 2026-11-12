@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Все видеоклипы — Светлана Волчица</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            stage: '#09090b',
+            gold: '#d4af37',
+            crimson: '#dc2626'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #09090b; color: #f4f4f5; font-family: system-ui, -apple-system, sans-serif; }
+    .glass-card { background: rgba(24, 24, 27, 0.72); backdrop-filter: blur(12px); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Шапка -->
+  <header class="sticky top-0 z-40 bg-stage/90 backdrop-blur border-b border-zinc-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="inline-flex items-center gap-2 text-sm font-bold text-gold hover:underline">
+        ← На главную
+      </a>
+      <span class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-zinc-300">
+        🐺 Светлана Волчица • Видеография
+      </span>
+      <a href="https://www.youtube.com/watch?v=Q3bOVHh_jgY" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-bold text-white transition">
+        YouTube ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- Основной контент -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-crimson/15 text-crimson text-xs font-bold uppercase tracking-wider mb-3">
+          Полная видеография
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white">
+          Все видеоклипы Светланы Волчицы
+        </h1>
+        <p class="text-sm sm:text-base text-zinc-400 mt-1">
+          Премьеры, драматические баллады, хиты и концертные видео
+        </p>
+      </div>
+      <div class="w-full md:w-72">
+        <input id="videoSearch" type="text" placeholder="Поиск клипа..." oninput="renderVideos()"
+          class="w-full px-4 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-gold" />
+      </div>
+    </div>
+
+    <div id="videosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="border-t border-zinc-800 py-6 text-center text-xs text-zinc-500">
+    © Светлана Волчица • <a href="index.html" class="text-gold hover:underline">Главная страница</a> • <a href="admin/" class="hover:text-zinc-300">Админка</a>
+  </footer>
+
+  <!-- Модальное окно видео -->
+  <div id="videoModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target===this) closeVideoModal()">
+    <div class="w-full max-w-4xl bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
+      <div class="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
+        <h3 id="videoModalTitle" class="text-sm sm:text-base font-bold text-white truncate">Видеоклип</h3>
+        <button onclick="closeVideoModal()" class="w-8 h-8 rounded-lg bg-zinc-800 hover:bg-crimson text-white font-bold flex items-center justify-center">✕</button>
+      </div>
+      <div class="aspect-video bg-black">
+        <iframe id="videoModalIframe" class="w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allVideos = [
+      { title: 'Светлана Волчица — «Волки» 🐺', badge: 'Хит', desc: 'Официальный музыкальный клип', url: 'https://www.youtube.com/watch?v=Q3bOVHh_jgY' },
+      { title: '«Танцую до рассвета»', badge: 'Мощная лирика', desc: 'Драматическая баллада • Вокал на разрыв', url: 'https://www.youtube.com/watch?v=S-cffm6gY3E' },
+      { title: '«Липучка»', badge: 'Душевная лирика', desc: 'Музыкальный клип • Премьера', url: 'https://www.youtube.com/watch?v=escrah55SUA' },
+      { title: '«Черное солнце»', badge: 'Драма', desc: 'Музыкальная драма • Премьера', url: 'https://www.youtube.com/watch?v=6dzoO6QXn28' }
+    ];
+
+    function extractYtId(url) {
+      if (!url) return '';
+      const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return m ? m[1] : url.trim();
+    }
+
+    function renderVideos() {
+      const q = (document.getElementById('videoSearch').value || '').trim().toLowerCase();
+      const filtered = allVideos.filter(v =>
+        (v.title || '').toLowerCase().includes(q) ||
+        (v.desc || '').toLowerCase().includes(q) ||
+        (v.badge || '').toLowerCase().includes(q)
+      );
+      const grid = document.getElementById('videosGrid');
+      if (!filtered.length) {
+        grid.innerHTML = '<p class="text-zinc-400 col-span-full text-center py-12">Клипы по вашему запросу не найдены</p>';
+        return;
+      }
+      grid.innerHTML = filtered.map((c, i) => {
+        const ytid = extractYtId(c.url);
+        const safeTitle = (c.title || '').replace(/'/g, "\\'");
+        const isLirika = (c.badge || '').toLowerCase().includes('лирик') || (c.badge || '').toLowerCase().includes('драм');
+        const badgeClass = isLirika
+          ? 'bg-purple-900/90 text-purple-200 border border-purple-500/40'
+          : (i === 0 ? 'bg-gold text-zinc-950' : 'bg-crimson text-white');
+        const iconClass = isLirika ? 'bg-crimson text-white' : (i === 3 ? 'bg-purple-600 text-white' : 'bg-gold text-zinc-950');
+        const ytLink = c.url && c.url.startsWith('http') ? c.url : 'https://www.youtube.com/watch?v=' + ytid;
+
+        return `
+          <div class="glass-card rounded-2xl overflow-hidden border border-zinc-800 hover:border-gold/50 transition-all group flex flex-col">
+            <div class="relative aspect-video bg-zinc-900 overflow-hidden cursor-pointer" onclick="openVideoModal('${ytid}', '${safeTitle}')">
+              <img src="https://img.youtube.com/vi/${ytid}/hqdefault.jpg" alt="${c.title || ''}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                <div class="w-12 h-12 rounded-full ${iconClass} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                  <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              ${c.badge ? `<span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded ${badgeClass} font-bold text-[10px] uppercase tracking-wider">${c.badge}</span>` : ''}
+            </div>
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <h4 class="text-sm font-bold text-white group-hover:text-gold transition-colors">${c.title || ''}</h4>
+                <p class="text-xs text-zinc-400 mt-1">${c.desc || ''}</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                <button onclick="openVideoModal('${ytid}', '${safeTitle}')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
+                  ▶ Смотреть клип
+                </button>
+                <a href="${ytLink}" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">YouTube ↗</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openVideoModal(ytId, title) {
+      document.getElementById('videoModalTitle').textContent = title;
+      document.getElementById('videoModalIframe').src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1';
+      document.getElementById('videoModal').classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      document.getElementById('videoModalIframe').src = '';
+      document.getElementById('videoModal').classList.add('hidden');
+    }
+
+    async function loadAllVideos() {
+      renderVideos();
+      try {
+        const res = await fetch('content/all_videos.json?v=' + Date.now());
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && Array.isArray(data.items) && data.items.length > 0) {
+          allVideos = data.items;
+          renderVideos();
+        }
+      } catch (e) {}
+    }
+    loadAllVideos();
+  </script>
+</body>
+</html>
