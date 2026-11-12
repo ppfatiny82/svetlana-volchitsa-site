@@ -475,6 +475,10 @@
                                 <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                 <span>Скачать MP3</span>
                             </button>
+                            <div class="flex items-center gap-2 px-3.5 py-2.5 rounded-xl glass-card border border-zinc-700">
+                                <button type="button" id="btnMuteToggle" onclick="if(typeof htmlAudio!=='undefined'){htmlAudio.muted=!htmlAudio.muted;this.textContent=htmlAudio.muted?'🔇':'🔊';}" class="text-sm leading-none hover:scale-110 transition-transform" title="Вкл/выкл звук">🔊</button>
+                                <input type="range" id="mainVolumeSlider" min="0" max="1" step="0.01" value="1" oninput="if(typeof htmlAudio!=='undefined'){htmlAudio.volume=parseFloat(this.value);htmlAudio.muted=(htmlAudio.volume===0);const b=document.getElementById('btnMuteToggle');if(b)b.textContent=htmlAudio.muted?'🔇':'🔊';}" class="w-20 sm:w-24 accent-amber-400 cursor-pointer h-1.5 bg-zinc-700 rounded-lg" title="Громкость" />
+                            </div>
                         </div>
                     </div>
                 </div>
