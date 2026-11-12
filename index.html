@@ -1320,8 +1320,42 @@
                     renderTracklist(activeCategory, activeSearch);
                 });
                 container.appendChild(btn);
-            });
-        }
+    });
+    renderAlbumShowcase();
+}
+
+function renderAlbumShowcase() {
+    const tabsEl = document.getElementById('albumTabsContainer');
+    if (!tabsEl) return;
+    let card = document.getElementById('albumShowcaseCard');
+    if (!card) {
+        card = document.createElement('div');
+        card.id = 'albumShowcaseCard';
+        tabsEl.insertAdjacentElement('afterend', card);
+    }
+    if (activeAlbum === 'all') {
+        card.className = 'hidden';
+        card.innerHTML = '';
+        return;
+    }
+    const alb = ALBUMS.find(a => a.title === activeAlbum);
+    if (!alb) {
+        card.className = 'hidden';
+        return;
+    }
+    const albTracks = TRACKS.filter(t => t.album === alb.title);
+    const rawCover = alb.cover || (albTracks[0] && albTracks[0].cover) || '';
+    const coverUrl = typeof fixPath === 'function' ? fixPath(rawCover) : rawCover;
+    card.className = 'mb-8 glass-card rounded-2xl p-5 sm:p-6 border border-gold/30 flex flex-col sm:flex-row items-center gap-5';
+    card.innerHTML = `
+        ${coverUrl ? `<img src="${coverUrl}" alt="${alb.title}" class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl object-cover shadow-xl border border-gold/40 flex-shrink-0">` : ''}
+        <div class="text-center sm:text-left">
+            <span class="inline-block px-2.5 py-0.5 rounded bg-gold/15 text-gold text-[10px] font-bold uppercase tracking-wider mb-2">Альбом</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-white">${alb.title}</h3>
+            <p class="text-sm text-zinc-400 mt-1">Светлана Волчица • Треков в альбоме: ${albTracks.length}</p>
+        </div>
+    `;
+}
 
         function renderTracklist(category = 'all', searchQuery = '') {
             const container = document.getElementById('trackListContainer');
