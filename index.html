@@ -1632,15 +1632,16 @@ ${t.lyrics || 'Текст в обработке'}`], {type: 'text/plain;charset=
                         });
                     }
                 });
-            } else if (data.tracks && Array.isArray(data.tracks)) {
-                data.tracks.forEach((track, idx) => {
-                    loadedTracks.push({
-                        id: idx + 1,
-                        title: track.track_title || track.title || `Трек ${idx + 1}`,
-                        album: track.album || 'Сингл',
-                        genre: track.genre || 'Хит • 2026',
-                        cover: fixPath(track.track_cover || track.cover) || '',
-                        audio: fixPath(track.audio || ''),
+            } 
+        if (data.tracks && Array.isArray(data.tracks)) {
+            data.tracks.forEach((track, idx) => {
+                loadedTracks.push({
+                    id: loadedTracks.length + 1,
+                    title: track.track_title || track.title || `Трек ${idx + 1}`,
+                    album: track.album || 'Сингл',
+                    genre: track.genre || 'Хит • 2026',
+                    cover: fixPath(track.track_cover || track.cover) || '',
+                    audio: fixPath(track.audio || track.file || ''),
                         lyrics: track.lyrics || '',
                         duration: track.duration || '3:30',
                         year: track.year || '2026',
