@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "title": "Светлана Волчица — «Волки» 🐺",
+      "badge": "Хит",
+      "desc": "Официальный музыкальный клип",
+      "url": "https://www.youtube.com/watch?v=Q3bOVHh_jgY"
+    },
+    {
+      "title": "«Танцую до рассвета»",
+      "badge": "Мощная лирика",
+      "desc": "Драматическая баллада • Вокал на разрыв",
+      "url": "https://www.youtube.com/watch?v=S-cffm6gY3E"
+    },
+    {
+      "title": "«Липучка»",
+      "badge": "Душевная лирика",
+      "desc": "Музыкальный клип • Премьера",
+      "url": "https://www.youtube.com/watch?v=escrah55SUA"
+    },
+    {
+      "title": "«Черное солнце»",
+      "badge": "Драма",
+      "desc": "Музыкальная драма • Премьера",
+      "url": "https://www.youtube.com/watch?v=6dzoO6QXn28"
+    }
+  ]
+}
