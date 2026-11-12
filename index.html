@@ -2117,8 +2117,11 @@ function syncWithAdmin() {
 
             // Название сингла из вашей админки
             if (cfg.featured_single_title) {
+                const cleanTitle = cfg.featured_single_title.replace(/[«»"]/g, '').trim();
                 const el = document.getElementById('heroSingleTitle');
-                if (el) el.textContent = cfg.featured_single_title;
+                if (el) el.textContent = `«${cleanTitle}»`;
+                const btnEl = document.getElementById('btnPlayFeaturedHitText');
+                if (btnEl) btnEl.textContent = `Слушать «${cleanTitle}»`;
             }
 
             // Стикеры и названия, которые вы задали в админке
