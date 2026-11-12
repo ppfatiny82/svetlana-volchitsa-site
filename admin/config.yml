@@ -28,6 +28,7 @@ collections:
           - { label: "Spotify", name: "spotify_link", widget: "string", required: false }
           - { label: "Band.link", name: "bandlink_link", widget: "string", required: false }
           - { label: "YouTube", name: "youtube_link", widget: "string", required: false }
+          - { label: "YouTube Music", name: "youtube_music_link", widget: "string", required: false }
           
           # 6 стикеров: названия и картинки для каждого
           - { label: "Стикер 1 — Название", name: "sticker_1_title", widget: "string", default: "«Приветики!»", required: false }
