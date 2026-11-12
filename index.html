@@ -1060,6 +1060,10 @@
                 <button id="btnStickyLyrics" class="hidden sm:inline-block px-3 py-1 rounded-lg bg-stage border border-zinc-700 text-xs font-semibold text-zinc-300 hover:text-white hover:border-gold/40 transition-all">
                     Текст
                 </button>
+                <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-stage border border-zinc-700">
+                    <button type="button" id="stickyMuteBtn" onclick="if(typeof htmlAudio!=='undefined'){htmlAudio.muted=!htmlAudio.muted;const ic=htmlAudio.muted?'🔇':'🔊';this.textContent=ic;const b=document.getElementById('btnMuteToggle');if(b)b.textContent=ic;}" class="text-xs leading-none" title="Звук">🔊</button>
+                    <input type="range" id="stickyVolumeSlider" min="0" max="1" step="0.01" value="1" oninput="if(typeof htmlAudio!=='undefined'){htmlAudio.volume=parseFloat(this.value);htmlAudio.muted=(htmlAudio.volume===0);const ic=htmlAudio.muted?'🔇':'🔊';const ms=document.getElementById('mainVolumeSlider');if(ms)ms.value=this.value;const b1=document.getElementById('btnMuteToggle');if(b1)b1.textContent=ic;const b2=document.getElementById('stickyMuteBtn');if(b2)b2.textContent=ic;}" class="w-16 accent-amber-400 cursor-pointer h-1 bg-zinc-700 rounded-lg" title="Громкость" />
+                </div>
             </div>
         </div>
     </div>
