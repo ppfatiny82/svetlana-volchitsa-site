@@ -2289,10 +2289,10 @@ async function loadAdminVideos() {
     if (!container) return;
 
     const clips = [
-      { title: data.v1_title, badge: data.v1_badge, desc: data.v1_desc, url: data.v1_url },
-      { title: data.v2_title, badge: data.v2_badge, desc: data.v2_desc, url: data.v2_url },
-      { title: data.v3_title, badge: data.v3_badge, desc: data.v3_desc, url: data.v3_url },
-      { title: data.v4_title, badge: data.v4_badge, desc: data.v4_desc, url: data.v4_url }
+      { title: data.v1_title, badge: data.v1_badge, desc: data.v1_desc, url: data.v1_url, vk: data.v1_vk },
+      { title: data.v2_title, badge: data.v2_badge, desc: data.v2_desc, url: data.v2_url, vk: data.v2_vk },
+      { title: data.v3_title, badge: data.v3_badge, desc: data.v3_desc, url: data.v3_url, vk: data.v3_vk },
+      { title: data.v4_title, badge: data.v4_badge, desc: data.v4_desc, url: data.v4_url, vk: data.v4_vk }
     ];
 
     function extractYtId(url) {
@@ -2329,9 +2329,12 @@ async function loadAdminVideos() {
               <button onclick="openVideoModal('${ytid}', '${(c.title || '').replace(/'/g, "\\'")}')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
                 ▶ Смотреть клип
               </button>
-              <a href="${c.url && c.url.startsWith('http') ? c.url : 'https://www.youtube.com/watch?v=' + ytid}" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">
-                YouTube ↗
-              </a>
+              <div class="flex items-center gap-2.5">
+                ${c.vk ? `<a href="${c.vk}" target="_blank" class="text-[11px] font-bold text-sky-400 hover:text-sky-300">ВК Видео ↗</a>` : ''}
+                <a href="${c.url && c.url.startsWith('http') ? c.url : 'https://www.youtube.com/watch?v=' + ytid}" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">
+                  YouTube ↗
+                </a>
+              </div>
             </div>
           </div>
         </div>
