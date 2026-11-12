@@ -70,6 +70,7 @@ collections:
                   - { label: "Аудиофайл (MP3)", name: "audio", widget: "file", required: true }
                   - { label: "Длительность", name: "duration", widget: "string", default: "3:30", required: false }
                   - { label: "Год", name: "year", widget: "string", default: "2026", required: false }
+                  - { label: "Категория", name: "category", widget: "select", options: [{ label: "Танцевальные хиты", value: "dance" }, { label: "Для души и лирика", value: "soul" }, { label: "Юмор и драйв", value: "humor" }], required: false }
                   - { label: "Текст песни", name: "lyrics", widget: "text", required: false }
           - label: "Отдельные синглы (вне альбомов)"
             name: "tracks"
@@ -82,6 +83,7 @@ collections:
               - { label: "Длительность", name: "duration", widget: "string", default: "3:30" }
               - { label: "Обложка песни", name: "cover", widget: "image", required: false }
               - { label: "Аудиофайл (MP3)", name: "file", widget: "file", required: true }
+              - { label: "Категория", name: "category", widget: "select", options: [{ label: "Танцевальные хиты", value: "dance" }, { label: "Для души и лирика", value: "soul" }, { label: "Юмор и драйв", value: "humor" }], required: false }
               - { label: "Текст песни", name: "lyrics", widget: "text", required: false }
 
   - name: "faq"
