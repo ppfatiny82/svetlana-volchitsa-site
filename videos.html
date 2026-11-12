@@ -51,7 +51,7 @@
           Все видеоклипы Светланы Волчицы
         </h1>
         <p class="text-sm sm:text-base text-zinc-400 mt-1">
-          Премьеры, драматические баллады, хиты и концертные видео
+          Авторские видеоклипы, музыкальные истории, лирика и драйв
         </p>
       </div>
       <div class="w-full md:w-72">
@@ -137,7 +137,10 @@
                 <button onclick="openVideoModal('${ytid}', '${safeTitle}')" class="text-xs font-bold text-gold hover:underline flex items-center gap-1">
                   ▶ Смотреть клип
                 </button>
-                <a href="${ytLink}" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">YouTube ↗</a>
+                <div class="flex items-center gap-2.5">
+                  ${c.vk_url ? `<a href="${c.vk_url}" target="_blank" class="text-[11px] font-bold text-sky-400 hover:text-sky-300">ВК Видео ↗</a>` : ''}
+                  <a href="${ytLink}" target="_blank" class="text-[11px] text-zinc-400 hover:text-white">YouTube ↗</a>
+                </div>
               </div>
             </div>
           </div>
