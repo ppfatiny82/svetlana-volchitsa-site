@@ -131,15 +131,40 @@
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobileDrawer" class="hidden lg:hidden border-t border-zinc-800 bg-panel px-5 pt-4 pb-6 space-y-3">
-            <a href="#discography" class="block py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">Дискография</a>
-            <a href="videos.html" class="block py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">Видеоклипы</a>
-            <a href="#custom-song" class="block py-2 text-gold font-bold mobile-nav-link">Песня на заказ (юбилей, свадьба)</a>
-            <a href="#about" class="block py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">О певице</a>
-            <a href="#streaming" class="block py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">Музыкальные площадки</a>
-            <a href="#stickers" class="block py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">Стикеры Telegram</a>
-            <button id="btnMobileOpenLicense" class="block w-full text-left py-2 text-zinc-200 hover:text-gold font-medium">Лицензионное соглашение</button>
-            <a href="#faq" class="block py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">Вопрос-ответ</a>
+        <div id="mobileDrawer" class="hidden lg:hidden border-t border-zinc-800 bg-panel px-5 pt-4 pb-6 space-y-2">
+            <a href="#discography" class="flex items-center gap-2.5 py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><circle cx="12" cy="12" r="2" stroke-width="2"/></svg>
+                <span>Дискография</span>
+            </a>
+            <a href="#videos" class="flex items-center gap-2.5 py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="2"/><polygon points="10,9 15,12 10,15" fill="currentColor"/></svg>
+                <span>Видеоклипы</span>
+            </a>
+            <a href="#custom-song" class="flex items-center gap-2.5 py-2 text-gold font-bold mobile-nav-link">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4m-4 0h8"/></svg>
+                <span>Песня на заказ</span>
+                <span class="px-1.5 py-0.5 rounded bg-crimson text-white text-[10px] font-extrabold uppercase">ХИТ</span>
+            </a>
+            <a href="#about" class="flex items-center gap-2.5 py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4" stroke-width="2"/></svg>
+                <span>О певице</span>
+            </a>
+            <a href="#streaming" class="flex items-center gap-2.5 py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" stroke-width="2"/><circle cx="18" cy="16" r="3" stroke-width="2"/></svg>
+                <span>Площадки</span>
+            </a>
+            <a href="#stickers" class="flex items-center gap-2.5 py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span>Стикеры TG</span>
+            </a>
+            <button id="btnMobileOpenLicense" class="flex items-center gap-2.5 w-full text-left py-2 text-zinc-200 hover:text-gold font-medium">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8" stroke-width="2"/></svg>
+                <span>Лицензия</span>
+            </button>
+            <a href="#faq" class="flex items-center gap-2.5 py-2 text-zinc-200 hover:text-gold font-medium mobile-nav-link">
+                <svg class="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2"/></svg>
+                <span>Вопрос-ответ</span>
+            </a>
         </div>
     </header>
 
